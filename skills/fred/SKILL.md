@@ -73,9 +73,28 @@ Do not invent shipped surfaces. Label local proposals as proposals. Docs browsin
 - One slice per file. Next `NNN` from the index, not from guessing.
 - Header: status, dependencies, derived-from, specification references.
 - **Depth:** drafts may state outcomes/acceptance; before coding, fill feature-owned contracts (schema, events, guards, timeouts, recovery) against **implemented** dependencies.
-- Close-out: move the file to `docs/features/implemented/`, repair relative links, remove the open-index row, add a recently-closed line. **No stub** left in `docs/features/`.
+- Close-out: follow the checklist below. Do not leave a stub in `docs/features/`.
 
 Full skeleton (all 11 numbered sections): [templates/feature.md](templates/feature.md). Methodology: [references/methodology.md](references/methodology.md). Workflow: [references/agent-workflow.md](references/agent-workflow.md).
+
+## Close-out checklist
+
+When the slice is shipped (acceptance done, or the user asked to close):
+
+1. **Move** `docs/features/{NNN}-{slug}.md` → `docs/features/implemented/` (same filename). **No stub**, redirect, or leftover copy in the open folder.
+2. **Fix links** that still use the old path: the moved FRED (relative `../` vs `../../`), `OPEN-FRED-INDEX.md`, `implemented/README.md`, other FREDs, the agent entrypoint, architecture/README pointers.
+3. **Index:** drop the open-table row; add a Recently closed line (date + notes); bump **Open** / **Implemented** header counts if present; refresh the Updated blurb.
+4. **DAG:** if the index has mermaid/flowchart, move that ID off the open chain (shipped side or drop).
+5. **implemented/README.md:** add a Closed-table row linking `./{NNN}-{slug}.md`.
+
+Illustration only (not a required script):
+
+```bash
+mv docs/features/NNN-slug.md docs/features/implemented/
+rg -n 'NNN-slug\.md|docs/features/NNN-slug' --glob '*.md'
+```
+
+Project copies win: [templates/implemented-README.md](templates/implemented-README.md), [references/methodology.md](references/methodology.md).
 
 ## Optional patterns (use when they fit; not law)
 

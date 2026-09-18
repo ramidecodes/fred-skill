@@ -25,7 +25,7 @@ Do not start a later FRED because the filename number is higher.
 
 ## Close-out
 
-Move the file, repair links, update the index. See [methodology.md](methodology.md).
+Use the **Close-out checklist** in `SKILL.md` (move → fix links → drop index row → bump counts → mermaid → implemented README). Do not skip link repair or leave a stub. See [methodology.md](methodology.md).
 
 ## If FRED docs are absent
 

@@ -1,6 +1,4 @@
-# FRED
-
-**Feature Requirement Documents** — specify one slice, implement from the file, track sequence in git.
+# FRED = **Feature Requirement Documents**
 
 You describe what you want in plain language. A larger, more capable model turns that into a structured FRED. A smaller, faster agent implements from that file. An open index records what is done and what is next. All of it lives in the repo, next to the code.
 
@@ -36,7 +34,7 @@ docs/
     └── implemented/                      # shipped FREDs
 ```
 
-- **Entrypoint** owns contributor workflow, verify commands, and where things live in *this* tree.
+- **Entrypoint** owns contributor workflow, verify commands, and where things live in _this_ tree.
 - **Index** owns sequence. Filename numbers are stable identity, not “implement 003 because 003 > 002.”
 - **FRED files** own how to implement one slice. Architecture docs are read only when the entrypoint or FRED links them.
 - **Code** owns what actually runs. If docs and code disagree, say so.
@@ -112,9 +110,9 @@ Implement the next open FRED. Don't start later ones whose deps aren't shipped.
 ## For humans vs for agents
 
 - **This README** is the idea: why FRED, how the two models split work, how to install.
-- **`skills/fred/SKILL.md`** is agent procedure: session start, authority, bootstrap, close-out.
-- **`skills/fred/references/`** is detail (methodology, workflow, bootstrap) loaded when needed.
-- **`skills/fred/templates/`** is what gets copied into a consuming repo, then edited there.
+- `skills/fred/SKILL.md` is agent procedure: session start, authority, bootstrap, close-out.
+- `skills/fred/references/` is detail (methodology, workflow, bootstrap) loaded when needed.
+- `skills/fred/templates/` is what gets copied into a consuming repo, then edited there.
 
 ## License
 

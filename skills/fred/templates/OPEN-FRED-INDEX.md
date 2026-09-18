@@ -43,4 +43,4 @@ Completed history belongs in [implemented/](./implemented/).
 2. Keep IDs stable; update dependencies and depth together.
 3. Before implementation, fill feature-owned contracts against actual dependencies.
 4. Record verification and blocked runtime/account probes honestly.
-5. When shipped: move to `implemented/`, repair relative links, remove the open row, retain historical decisions.
+5. When shipped: move to `implemented/` (no stub), repair every old-path link, drop the open row, add Recently closed, bump **Open** / **Implemented** counts, update mermaid if present, add `implemented/README.md` Closed row.

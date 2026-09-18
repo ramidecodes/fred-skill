@@ -43,7 +43,7 @@ Next unused FRED number: **{{NEXT_FRED_NUMBER}}**. Open: {{OPEN_COUNT}}. Impleme
 1. Open the index. Work the first open row whose dependencies are implemented (or the operator named a specific FRED).
 2. {{START_SEQUENCE_NOTES}}
 3. Drafts: fill feature-owned contracts (schema, events, guards, timeouts, recovery) against shipped dependencies before coding.
-4. When a FRED ships, move it to `implemented/` and repair links. Do not duplicate FRED checklists in this file.
+4. When a FRED ships, follow [implemented/README.md](../features/implemented/README.md) (move, fix links, index row/counts, no stub). Do not duplicate the full checklist here.
 
 ## Tree
 

@@ -70,12 +70,7 @@ The skeleton always includes **all 11 numbered sections**. Fill what the slice n
 
 ## Close-out
 
-When the slice is implemented:
-
-1. Move `docs/features/{NNN}-{slug}.md` → `docs/features/implemented/` (same name).
-2. Repair relative links inside the moved file.
-3. Update the open index: remove the open row; add recently closed; bump the Updated date; recount open/implemented.
-4. Do **not** leave a stub in `docs/features/`.
+Follow the **Close-out checklist** in `SKILL.md`. In short: `mv` the file into `implemented/` (no stub), repair every old-path link, drop the open-index row, add recently closed, bump Open/Implemented counts, update mermaid if present, add the `implemented/README.md` Closed row.
 
 ## Honesty
 
