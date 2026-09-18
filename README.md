@@ -1,5 +1,7 @@
 # FRED = **Feature Requirement Documents**
 
+Works with Cursor, Claude Code, and Codex via the [skills CLI](https://github.com/vercel-labs/skills).
+
 You describe what you want in plain language. A larger, more capable model turns that into a structured FRED. A smaller, faster agent implements from that file. An open index records what is done and what is next. All of it lives in the repo, next to the code.
 
 Linear, Notion, and Jira can still exist. For this slice of planning they are optional sources you cite as “derived from.” The documents the agent maintains and implements from are in git.
