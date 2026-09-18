@@ -1,14 +1,15 @@
 ---
 name: fred
 description: >-
-  Applies Feature Requirement Documents (FREDs) and the consuming project's
-  agent entrypoint for planning, implementing, reviewing, debugging, and
-  bootstrapping software. Use at the start of every session and whenever
-  coding, implementing, planning, scaffolding, reviewing PRs, or choosing
-  next work in a repository that uses or should use FREDs, Feature Requirement
-  Documents, agent entrypoints, OPEN-FRED-INDEX, docs/features, or
-  00-AGENT-ENTRYPOINT.md. Locates and reads the project's entrypoint before
-  other work; bootstraps FRED docs only when they are missing.
+  Applies Feature Requirement Documents (FREDs) in the current software
+  repository: turn plain-language feature ideas into slice-sized specs, track
+  sequence in OPEN-FRED-INDEX, and implement from those files. Use at the start
+  of every session in a repo that uses or should use FREDs. Also use when the
+  user is planning or implementing software features here: add a new feature,
+  write or update a FRED, ask what the next feature is, implement from the
+  index, scaffold FRED docs, or review/debug against a FRED or
+  00-AGENT-ENTRYPOINT.md. Do not use for unrelated talk about product features
+  of third-party websites or products outside the repo being built.
 ---
 
 # FRED
@@ -37,6 +38,17 @@ Recommend consuming repos add a one-liner in `AGENTS.md` or README so teammates 
 ```markdown
 Agent contract: read docs/agent-guides/00-AGENT-ENTRYPOINT.md at session start.
 ```
+
+## Typical user asks
+
+| They say | You do |
+| --- | --- |
+| Plain-language feature / "add a FRED for…" | Allocate next `NNN` from the index; write `docs/features/{NNN}-….md` from the project template |
+| "What's the next feature?" / "implement next" | First open index row whose dependencies are shipped (or an allowed fake) |
+| "Add a new feature" while implementing in this repo | Spec into a FRED (or deepen a draft) before coding that slice |
+| Missing entrypoint / `docs/features/` | Offer bootstrap; do not write templates until they agree |
+
+Unrelated "features" of some other product or website: do not hijack. Stay on the current repo's software work.
 
 ## Git, deploy, PRs
 
