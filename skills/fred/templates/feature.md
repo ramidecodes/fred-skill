@@ -1,193 +1,78 @@
-# FRED XX — Feature Name
+# FRED {{NNN}} — {{FEATURE_NAME}}
 
-<!-- All 11 numbered sections stay in every FRED. Prefer a short "N/A — …" over deleting a section. -->
+**Status:** Draft
+**Track:** {{TRACK}}
+**Authority:** [Agent entrypoint](../agent-guides/00-AGENT-ENTRYPOINT.md)
+**Derived from:** {{SOURCE_OR_LOCAL}}
+**Architecture / contracts:** {{RELEVANT_DOCUMENT_LINKS}}
+**Implementation prerequisites:** {{FRED_LINKS_AND_REQUIRED_CONTRACT_OR_IMPLEMENTATION_OR_NONE}}
+**Delivery gates:** {{OPERATIONS_ITEM_LINKS_OR_NONE}}
 
-> **Architectural authority:** [../agent-guides/00-AGENT-ENTRYPOINT.md](../agent-guides/00-AGENT-ENTRYPOINT.md)
->
-> **Derived from:** ({{SOURCE_PAGES}}, prerequisite FREDs)
->
-> **Specification reference:** {{ARCHITECTURE_AND_README_LINKS}}
+Scheduling and readiness: [ROADMAP](./ROADMAP.md). Keep this path stable across
+Draft / Open / Implemented / Closed. Remove template instructions when filled.
 
-**Status:** {{STATUS}} — e.g. High-level draft (not implemented) / Detailed specification (not implemented) / Implemented (then this file should live under `implemented/`)
+## Goal and non-goals
 
-**Roadmap ID / stage:** {{ROADMAP_ID_OR_N_A}}
+{{SCOPED_OUTCOME_AND_EXPLICIT_EXCLUSIONS}}
 
-**Dependencies:** (linked prerequisite FREDs)
+## Behavior, contracts, and surfaces
 
-**Depth rule:** Drafts specify user outcomes, authority, and acceptance now; finalize feature-owned schema, route/API/event contracts, guards, timeouts, and recovery against **implemented** dependencies before coding.
+{{TESTABLE_BEHAVIOR_AND_AFFECTED_ROUTES_PACKAGES_OR_WORKFLOWS}}
 
-Execution order comes from [OPEN-FRED-INDEX.md](./OPEN-FRED-INDEX.md), not the numeric ID.
+<!-- Add detail only when relevant: state ownership, data reads/writes/schema,
+API/event shapes, guards, timeouts/recovery, compatibility/migrations, UI flow
+and design states, performance/security constraints, env names and policy.
+Contracts must be sufficiently defined before Open. When using an allowed fake,
+name the agreed contract, limitations, owner, and real integration responsibility.
+Keep requirements here; shared verification execution steps live in OPERATIONS. -->
 
-Replace `XX` in the title and filename with the next three-digit number from the index. Filename: `{NNN}-{kebab-case-slug}.md`.
+## Implementation tasks
 
----
+- [ ] {{IMPLEMENTATION_TASK}}
+- [ ] Update affected architecture and procedure docs, if changed.
+- [ ] Create/refine applicable setup and flow-verification items in OPERATIONS.
 
-**Local notes:** Restate only what **this repo’s** entrypoint/architecture already decided. Label any extra ideas as **local proposals**. Do not invent shipped surfaces.
+## Implementation acceptance
 
----
+- [ ] {{OBSERVABLE_SLICE_CRITERION}}
+- [ ] Required behavioral checks pass; UI changes were rendered and inspected.
+- [ ] Project global check passes at its documented scope on the final work.
 
-## Surfaces Touched
+<!-- Define proportionate checks, including relevant rules, permissions,
+persistence, contracts, and local integration. Existing cheap relevant E2E
+checks still run. Never quietly weaken criteria to fit the implementation. -->
 
-<!-- Mandatory. Routes, packages, workflows, and folders this FRED modifies or depends on. -->
+## Verification and handoff evidence
 
-| Surface | Role |
-| ------ | ---- |
-| (TBD) | |
+**Integration baseline:** {{REVISION_OR_WORKING_TREE_CONTEXT}}
+**Implemented date:** {{DATE_OR_PENDING}}
 
----
+| Check / inspection | Command or method / scope | Result and evidence | Date / revision |
+| --- | --- | --- | --- |
+| Global check | Project entrypoint command and working directory | Pending | |
+| Slice behavior / UI inspection | {{REQUIRED_METHOD}} | Pending | |
 
-## 1. Goal
+Before review handoff or Implemented/Closed sign-off, run the global command
+from the entrypoint, including its cascading module checks. Module-only checks
+do not replace it. Rerun after changes to check inputs; blocked/failed checks
+block sign-off. Record actual results, not expected results.
 
-<!-- Mandatory. Why this feature exists. One to three paragraphs. -->
+**Independent review:** {{NOT_REQUIRED_OR_PENDING_OR_LINKED_FINDINGS}}
+<!-- When applicable, append required corrections, delivery gaps, and optional
+improvements separately. Required corrections return this FRED to Open. -->
 
----
+## Delivery and closure
 
-## 2. User Story
+Linked [OPERATIONS](./OPERATIONS.md) items: {{APPLICABLE_TASK_IDS_OR_NONE}}.
+**Next action / owner:** {{PENDING_GATE_OR_NEXT_ACTION_AND_OWNER}}
+**Closed date / target:** {{DATE_AND_PREVIEW_PRODUCTION_OR_INTEGRATION_TARGET_OR_PENDING}}
+**Closure evidence:** {{GATE_RESULTS_AND_DEPLOYMENT_OR_REVISION_LINKS_OR_PENDING}}
 
-<!-- Mandatory. One or two stories. -->
+Implemented requires scoped behavior, local checks, global check, and updated
+docs. Closed additionally requires applicable delivery/review evidence and a
+current global-check pass. A mock cannot prove an integrated outcome. Record
+preview versus production explicitly; tooling/libraries use relevant integration
+proof. Configuration blockers leave correct code Implemented; code defects reopen it.
 
-**As a [role]**, I want [goal], so that [benefit].
-
----
-
-## 3. Functional Requirements
-
-<!-- Mandatory. Numbered subsections. Be specific and measurable. -->
-
-### 3.1 Subsection Name
-
-- Requirement details
-
-### 3.2 State Ownership
-
-<!-- Fill when this slice introduces or changes client/workflow/server state; otherwise N/A. -->
-
-- Source of truth
-- URL vs persisted vs local UI state
-
-### 3.3 Canonical Contract
-
-<!-- Fill when routes, APIs, events, or persisted shapes change; otherwise N/A. -->
-
-- Canonical shape
-- Compatibility aliases (separate from canonical)
-
-### 3.4 Compatibility / Migration
-
-<!-- Optional to flesh out; keep the heading. -->
-
-- Temporary inbound compatibility
-- What is intentionally not migrated yet
-
-### 3.5 Non-Goals
-
-<!-- Mandatory content. What this slice will not change. -->
-
--
-
-### 3.6 Autonomy, approvals, and policy
-
-<!-- Fill when humans/agents/gates matter; otherwise N/A. -->
-
-- Who may approve what
-- Whether unattended actions are in scope
-- Policy/version pins if relevant
-
----
-
-## 4. Data Requirements
-
-<!-- Mandatory. Stores, APIs, env vars. Use "none" rather than deleting. -->
-
-**Read:**
-
-**Write:**
-
-**New tables / collections:**
-
-**Modified client / workflow state:**
-
-**Environment Variables:**
-
-| Variable | Required | Description |
-| -------- | -------- | ----------- |
-
----
-
-## 5. User Flow
-
-<!-- Mandatory. Happy path first, then alternatives and errors. -->
-
-1. Step one
-2. Step two
-3. Step three
-
----
-
-## 6. Implementation Tasks
-
-<!-- Mandatory. Ordered work items. -->
-
-- [ ] Task one
-- [ ] Task two
-- [ ] Task three
-
----
-
-## 7. Acceptance Criteria
-
-<!-- Mandatory. Testable definition of done. -->
-
-- [ ] Criterion one
-- [ ] Criterion two
-- [ ] Touched surfaces match architecture / this FRED
-- [ ] Verification from [00-AGENT-ENTRYPOINT.md](../agent-guides/00-AGENT-ENTRYPOINT.md) was run (when scripts exist)
-
-### 7.1 Test Matrix
-
-<!-- Recommended. Keep the heading; N/A the rows if not applicable. -->
-
-| Area | What to verify |
-| --- | --- |
-| Parsing / validation | |
-| Navigation / routing | |
-| Persistence | |
-| Approvals / gates | |
-| Evidence / audit | |
-| Kill switch / pause | |
-| External adapters | |
-
----
-
-## 8. Edge Cases
-
-<!-- Mandatory heading. -->
-
-| Case | Behavior |
-| ---- | -------- |
-| | |
-
----
-
-## 9. Non-Functional Requirements
-
-<!-- Mandatory heading. Performance, security, UX, constraints. -->
-
-| Requirement | Target |
-| ----------- | ------ |
-| | |
-
----
-
-## 10. Manual Steps / Rollout Checklist
-
-<!-- Mandatory. Human operator work: secrets, DNS, dashboards. -->
-
-- [ ] Document dashboard, DNS, or secret wiring this feature needs
-- [ ] Production deploy only when the task asks for it
-
----
-
-## 11. Decisions and Open Validation
-
-<!-- Mandatory. Separate locked decisions, operator-resolved policy, local proposals, and remaining live validation gates. Name which tasks are blocked and which may proceed against fakes. -->
+<!-- Add decisions/open questions only when needed. Record justified scope
+changes and source decisions; optional improvements become follow-up proposals. -->

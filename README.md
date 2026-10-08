@@ -2,7 +2,7 @@
 
 Works with Cursor, Claude Code, and Codex via the [skills CLI](https://github.com/vercel-labs/skills).
 
-You describe what you want in plain language. A larger, more capable model turns that into a structured FRED. A smaller, faster agent implements from that file. An open index records what is done and what is next. All of it lives in the repo, next to the code.
+You describe what you want in plain language. An agent turns that into a scoped FRED and implements from that file. A roadmap groups implementation into tracks; operations checklists capture setup and shared UX verification. Independent review can use a separate, more capable model when useful. All of it lives in the repo, next to the code.
 
 Linear, Notion, and Jira can still exist. For this slice of planning they are optional sources you cite as “derived from.” The documents the agent maintains and implements from are in git.
 
@@ -10,44 +10,74 @@ This package is methodology plus generators. It does not encode a product, cloud
 
 ## At a glance
 
-FRED is a repo-native spec workflow: one slice per file, an ordered open index, close-out into `implemented/`. Install the skill, bootstrap (or keep existing docs), then specify → implement → close. Boards stay optional; the files in `docs/features/` are what agents follow.
+FRED is a repo-native workflow: one implementation slice per file, stable IDs
+and paths, parallel tracks, and explicit verification evidence. Its lifecycle is
+Draft → Open → Implemented → Closed. Implementation can finish while external
+setup or a combined deployed journey remains pending.
 
-## The two-agent workflow
+## The workflow
 
-Unstructured ideas are cheap. Agents that implement from chat are expensive: they guess scope, skip contracts, and forget sequence.
+1. **Specify.** Define scoped behavior, contracts, non-goals, and proportionate
+   implementation criteria. Create applicable delivery tasks at this stage.
+2. **Schedule.** Group ordered slices by outcome and ownership in ROADMAP.
+   Agreed contracts and named fakes can enable parallel work; record integration
+   ownership. Implementation prerequisites govern readiness, not numeric IDs.
+3. **Implement and check.** Complete the behavior, local verification, and
+   affected documentation. Run the project's global lint/format check from its
+   documented working directory, including cascading monorepo module checks.
+   A module-only pass is insufficient. Record the actual results before review
+   handoff or marking Implemented.
+4. **Review when appropriate.** A separate reviewer checks the contract, code,
+   and evidence. Required corrections reopen work; optional suggestions do not
+   expand acceptance. The project can require review for consequential changes.
+5. **Verify delivery and close.** An operator or equipped agent executes linked
+   setup/flow tasks. Record target, revision/deployment, and evidence, and run
+   the global check again before Closed sign-off. Preview is distinct from
+   production; libraries/tooling use relevant integration evidence.
 
-1. **Specify.** A capable model turns needs into one slice-sized FRED (goal, contracts, tasks, acceptance).
-2. **Implement.** A faster agent reads the index, opens the named FRED, and builds that slice only.
-3. **Close out.** The file moves to `implemented/`. The index drops the open row and notes what shipped.
-
-You can run both steps in one session. The split still helps: the FRED is the handoff artifact, not a transcript.
+Missing, blocked, or failing global checks block sign-off. Rerun after changes
+to check inputs. Behavioral checks still matter: UI implementation requires
+rendering and inspection, and backend slices require appropriate rule,
+authorization, persistence, and integration checks. Shared deployed journeys
+and third-party setup live separately so correct implementation can progress.
+Planning-only Draft → Open does not require executing code checks.
 
 ## How it works in a project
 
-After bootstrap (or if you already have the files), a consuming repo looks like:
-
 ```text
 docs/
-├── agent-guides/00-AGENT-ENTRYPOINT.md   # this repo's agent contract
+├── agent-guides/00-AGENT-ENTRYPOINT.md   # workflow, commands, guide pointers
 └── features/
-    ├── OPEN-FRED-INDEX.md                # IDs, order, status, next number
-    ├── template.md                       # skeleton for a new FRED
-    ├── NNN-kebab-slug.md                 # one open slice
-    └── implemented/                      # shipped FREDs
+    ├── ROADMAP.md                        # IDs, ordered tracks, claims, next actions
+    ├── OPERATIONS.md                     # setup and shared delivery-flow evidence
+    ├── template.md                       # lean slice skeleton
+    └── NNN-kebab-slug.md                 # stable path in every lifecycle state
 ```
 
-- **Entrypoint** owns contributor workflow, verify commands, and where things live in _this_ tree.
-- **Index** owns sequence. Filename numbers are stable identity, not “implement 003 because 003 > 002.”
-- **FRED files** own how to implement one slice. Architecture docs are read only when the entrypoint or FRED links them.
-- **Code** owns what actually runs. If docs and code disagree, say so.
+- **Entrypoint and procedure guides** own project workflow and repeatable CI,
+  database, and preview procedures. Load the relevant guide when needed.
+- **Architecture** owns durable boundaries and contracts. Update existing docs
+  when implementation changes them; avoid duplicating code/generated schemas.
+- **FREDs** own slice requirements, authoritative lifecycle state, and local
+  evidence. ROADMAP summarizes them and schedules work.
+- **OPERATIONS** owns outstanding setup and combined UX verification. One flow
+  may cover several FREDs; keep secrets out of documentation and evidence.
+- **Code** establishes runtime facts. Resolve discrepancies with requirements
+  and architecture explicitly.
 
-This skill’s templates are seeds. Once the project files exist, they win. Do not overlay skill defaults on top of them.
+Readiness and blockers are roadmap fields, not extra lifecycle states. Each
+Implemented slice has a date and a next action or pending gate. Tracks do not
+authorize delegation, Git actions, or deployments.
+
+This skill's templates are seeds. Existing project documents govern the repo.
+Architecture and CI/database/preview guides are added only when useful; link
+existing documentation and maintained scripts instead of creating duplicates.
 
 ## When to use
 
 - You are building or planning software in a repository and want features as versioned docs an agent can follow.
 - You want to add a feature, ask what to implement next, or turn a messy idea into a FRED.
-- You want teammates (human or agent) to share one sequence without a board as the source of truth.
+- You want teammates (human or agent) to coordinate implementation tracks without a board as the source of truth.
 
 ## When not to
 
@@ -91,9 +121,9 @@ Agent contract: read docs/agent-guides/00-AGENT-ENTRYPOINT.md at session start.
 
 ## Bootstrap vs existing docs
 
-If the project has no entrypoint and no `docs/features/`, the agent should offer to generate them from `skills/fred/templates/`, filling placeholders from **this** repository.
+When FRED documentation is absent, bootstrap creates the entrypoint, FRED template, ROADMAP, and OPERATIONS, filling placeholders from this repository. The entrypoint records the actual global check command and working directory. Request bootstrap explicitly, or accept the agent's offer.
 
-If those files already exist, they are authority. The skill does not overwrite them with defaults and does not copy another product’s FRED 001–N.
+Existing project contracts remain authoritative. Legacy open indexes and state folders are migrated only when requested, preserving IDs, scope, history, and actual verification evidence. An old Implemented label alone does not prove deployed closure.
 
 ## Typical prompts
 
@@ -106,13 +136,17 @@ Add a FRED for export-to-CSV. Keep it a slice, not the whole reporting suite.
 
 We're missing FRED docs in this repo. Bootstrap them from the skill templates.
 
-Implement the next open FRED. Don't start later ones whose deps aren't shipped.
+Implement the next ready FRED in the reporting track. Run the global check before handoff.
+
+Review this Implemented FRED against its code and evidence. Separate required fixes from suggestions.
+
+Migrate our FRED index to tracks, and collect pending setup and UX checks in OPERATIONS.
 ```
 
 ## For humans vs for agents
 
-- **This README** is the idea: why FRED, how the two models split work, how to install.
-- `skills/fred/SKILL.md` is agent procedure: session start, authority, bootstrap, close-out.
+- **This README** is the idea: why FRED, how implementation and delivery verification fit together, how to install.
+- `skills/fred/SKILL.md` is agent procedure: project authority, lifecycle gates, tracks, and document responsibilities.
 - `skills/fred/references/` is detail (methodology, workflow, bootstrap) loaded when needed.
 - `skills/fred/templates/` is what gets copied into a consuming repo, then edited there.
 

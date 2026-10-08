@@ -1,126 +1,131 @@
 ---
 name: fred
 description: >-
-  Applies Feature Requirement Documents (FREDs) in the current software
-  repository: turn plain-language feature ideas into slice-sized specs, track
-  sequence in OPEN-FRED-INDEX, and implement from those files. Use at the start
-  of every session in a repo that uses or should use FREDs. Also use when the
-  user is planning or implementing software features here: add a new feature,
-  write or update a FRED, ask what the next feature is, implement from the
-  index, scaffold FRED docs, or review/debug against a FRED or
-  00-AGENT-ENTRYPOINT.md. Do not use for unrelated talk about product features
-  of third-party websites or products outside the repo being built.
+  Plan, implement, and review repository features using Feature Requirement
+  Documents (FREDs), parallel implementation tracks, and delivery checklists.
+  Use when writing or implementing a FRED, choosing the next slice, coordinating
+  tracks, bootstrapping FRED documentation, or reviewing against a project agent
+  entrypoint. Applies to software work in the current repository.
 ---
 
 # FRED
 
 **FRED** = Feature Requirement Document. One implementation slice per file.
 
-This skill is methodology + generators. The **consuming project's** entrypoint, index, architecture, and code are authority — never this skill's templates once those files exist.
+This skill supplies methodology and templates. Existing project documents and
+user instructions govern the consuming repository; templates are seeds.
 
-## 0. Session start (always)
+## Start and route
 
-Before other work this session:
+1. Read the project agent contract: prefer
+   `docs/agent-guides/00-AGENT-ENTRYPOINT.md`, following applicable `AGENTS.md`
+   instructions and README pointers. Follow the project's documented workflow.
+2. For planning, implementation, or “what next,” read
+   `docs/features/ROADMAP.md` and the relevant FRED. For setup or delivery
+   verification, also read the linked items in `docs/features/OPERATIONS.md`.
+3. Load architecture and procedure guides relevant to the task through those
+   pointers; discover missing relevant documentation when necessary.
+4. If FRED docs are absent and the user wants this methodology, use
+   [references/bootstrap.md](references/bootstrap.md). Offer bootstrap when it
+   has not been requested. Do not impose a competing spec system.
 
-1. Find and **READ** the project agent entrypoint. Prefer, in order:
-   - `docs/agent-guides/00-AGENT-ENTRYPOINT.md`
-   - `AGENTS.md` (root or `docs/`)
-   - a README / AGENTS.md pointer to the entrypoint
-2. If found: follow **that** file. Do not overlay skill defaults on top of it.
-3. If missing and the user is starting or growing a product/codebase: offer to bootstrap (see [references/bootstrap.md](references/bootstrap.md)). Do not dump templates into an unrelated repo without asking.
-4. Then read `docs/features/OPEN-FRED-INDEX.md` when the task is implementation or “what next.”
-5. Read a FRED file when implementing or specifying that slice. Read architecture docs **only as linked** from the entrypoint/FRED — not as a substitute for the index.
+Existing projects may still use `OPEN-FRED-INDEX.md` and state folders. Follow
+their contract until migration is requested; do not silently reorganize them.
 
-Do not paste this skill's templates into the conversation as product truth. Generate into the project only during bootstrap, then edit the **project** copies.
+## Document responsibilities
 
-Recommend consuming repos add a one-liner in `AGENTS.md` or README so teammates without this skill still load the contract:
-
-```markdown
-Agent contract: read docs/agent-guides/00-AGENT-ENTRYPOINT.md at session start.
-```
-
-## Typical user asks
-
-| They say | You do |
+| Document | Owns |
 | --- | --- |
-| Plain-language feature / "add a FRED for…" | Allocate next `NNN` from the index; write `docs/features/{NNN}-….md` from the project template |
-| "What's the next feature?" / "implement next" | First open index row whose dependencies are shipped (or an allowed fake) |
-| "Add a new feature" while implementing in this repo | Spec into a FRED (or deepen a draft) before coding that slice |
-| Missing entrypoint / `docs/features/` | Offer bootstrap; do not write templates until they agree |
+| Product / architecture | Intent, durable boundaries, contracts, decisions |
+| Agent entrypoint / guides | Project workflow, commands, environment procedures |
+| FRED | Slice scope, criteria, authoritative lifecycle state, evidence |
+| ROADMAP | Stable IDs, tracks, priority, dependency and state summaries, claims, next actions |
+| OPERATIONS | Setup tasks and shared delivery flows, their status and evidence |
 
-Unrelated "features" of some other product or website: do not hijack. Stay on the current repo's software work.
+Code establishes runtime facts. Resolve discrepancies with intended contracts;
+do not rewrite architecture or acceptance merely to justify incorrect code.
 
-## Git, deploy, PRs
+## Lifecycle and sign-off
 
-Follow the project entrypoint. If it is silent: do not commit, push, open PRs, or deploy unless the user asks. Entrypoint wins.
+Keep files at `docs/features/{NNN}-{kebab-slug}.md`; update their status headers
+and roadmap summaries without moving files. IDs are stable, not execution order.
 
-## Authority
-
-| Layer | Owns |
+| State | Meaning / gate |
 | --- | --- |
-| Product / architecture docs (as linked from the entrypoint) | Product intent, stack/layout **for this repo** |
-| **Code** | What actually runs |
-| FREDs | How to implement **one slice** |
-| Open index | Sequence, status, dependencies — **not** filename sort |
+| Draft | Scope or contracts need decisions. |
+| Open | Approved slice with sufficiently defined scope, contracts, and implementation criteria; required implementation work or checks remain. |
+| Implemented | Scoped behavior is in the project's designated integration baseline, required local checks pass, affected documentation is updated, and remaining delivery gates are linked. |
+| Closed | Applicable review, setup, and delivery gates pass in the declared target environment, with evidence. |
 
-IDs (`NNN`) are stable identity. Execution order is the index table.
+**Global check gate:** before handing an implementation to review or signing off
+as Implemented or Closed, run the project's global check command from its
+documented working directory on the current work and require success. This
+command covers project-wide linting and formatting, including cascading checks
+across monorepo modules. Module-only checks do not replace it. Also run the
+slice's required behavioral checks. Record command, scope, result, date, and
+revision or working-tree context in the FRED. Rerun after subsequent changes
+before sign-off; a prior pass on different code is insufficient. A missing,
+blocked, or failing command blocks sign-off: report the cause and next action,
+retain the current state, and do not mark the checks passed. Planning-only
+Draft → Open does not require executing code checks.
 
-Do not invent shipped surfaces. Label local proposals as proposals. Docs browsing ≠ live provider/SDK validation. Do not claim third-party APIs from training memory — verify installed versions and current docs. Record blocked probes honestly.
+UI implementation still requires rendering and inspecting the changed surface,
+layout, responsive behavior, and relevant states. Backend implementation still
+requires proportionate rule, authorization, persistence, and integration checks.
+Defer shared deployed journeys and external setup, not slice correctness.
 
-## FRED files
+Deployable features close with preview or production evidence specifying which
+environment passed. Tooling and libraries close with relevant integration
+evidence. Implemented does not mean “most code exists”; mocks cannot establish
+an integrated outcome promised by the slice.
 
-- Path: `docs/features/{NNN}-{kebab-slug}.md`
-- One slice per file. Next `NNN` from the index, not from guessing.
-- Header: status, dependencies, derived-from, specification references.
-- **Depth:** drafts may state outcomes/acceptance; before coding, fill feature-owned contracts (schema, events, guards, timeouts, recovery) against **implemented** dependencies.
-- Close-out: follow the checklist below. Do not leave a stub in `docs/features/`.
+## Tracks and dependencies
 
-Full skeleton (all 11 numbered sections): [templates/feature.md](templates/feature.md). Methodology: [references/methodology.md](references/methodology.md). Workflow: [references/agent-workflow.md](references/agent-workflow.md).
+- Allocate the next unused ID from ROADMAP; never reuse an ID. Specify or deepen
+  the slice before coding. Use [templates/feature.md](templates/feature.md).
+- Group ordered slices by bounded outcome and ownership. Identify shared
+  prerequisites and contracts before opening independent tracks.
+- Implementation prerequisites block coding or integration. An agreed contract
+  and explicitly allowed fake may enable parallel work before the provider is
+  implemented; record assumptions and the owner of real integration.
+- Delivery gates block closure. Setup actually necessary to discover a contract
+  or implement behavior must also be named as an implementation prerequisite.
+  Downstream work need not wait for prerequisites to be Closed.
+- For “next,” choose the highest-priority ready, unclaimed Open slice in the
+  requested track, or across tracks if none is named. Respect a named FRED's
+  prerequisites. Readiness, claims, and blockers are roadmap fields, not states.
+- Track scheduling does not authorize delegation, Git actions, or deployment.
 
-## Close-out checklist
+Planning and state details: [references/methodology.md](references/methodology.md).
+Implementation, review, and sign-off: [references/agent-workflow.md](references/agent-workflow.md).
 
-When the slice is shipped (acceptance done, or the user asked to close):
+## Delivery and documentation
 
-1. **Move** `docs/features/{NNN}-{slug}.md` → `docs/features/implemented/` (same filename). **No stub**, redirect, or leftover copy in the open folder.
-2. **Fix links** that still use the old path: the moved FRED (relative `../` vs `../../`), `OPEN-FRED-INDEX.md`, `implemented/README.md`, other FREDs, the agent entrypoint, architecture/README pointers.
-3. **Index:** drop the open-table row; add a Recently closed line (date + notes); bump **Open** / **Implemented** header counts if present; refresh the Updated blurb.
-4. **DAG:** if the index has mermaid/flowchart, move that ID off the open chain (shipped side or drop).
-5. **implemented/README.md:** add a Closed-table row linking `./{NNN}-{slug}.md`.
+Create applicable OPERATIONS items while specifying the slice. Link their stable
+IDs from the FRED; keep execution steps and task status in OPERATIONS. One flow
+may validate several FREDs. Each Implemented FRED has a date and a next action
+or linked pending gate so deferred work remains visible.
 
-Illustration only (not a required script):
+Update existing architecture docs for changed durable contracts and boundaries,
+and project guides for changed procedures, before implementation sign-off.
+Reuse existing docs and scripts. Add conditional data, UX, migration, or policy
+detail only when relevant; there is no fixed eleven-section requirement.
 
-```bash
-mv docs/features/NNN-slug.md docs/features/implemented/
-rg -n 'NNN-slug\.md|docs/features/NNN-slug' --glob '*.md'
-```
+## Review and permissions
 
-Project copies win: [templates/implemented-README.md](templates/implemented-README.md), [references/methodology.md](references/methodology.md).
+Independent review is optional unless the project or user requires it. Consider
+it for consequential changes and cross-track integration. Use an available
+reviewer/model within authorized scope; this skill does not require a provider
+or authorize paid model calls. Record required corrections separately from
+delivery gaps and optional improvements. Document and justify scope changes;
+never quietly weaken acceptance. Review approval does not replace execution.
 
-## Optional patterns (use when they fit; not law)
+Follow the project's Git/deploy rules and existing conversation authorization.
+If silent, do not commit, push, open PRs, or deploy without a user request.
+Do not claim provider behavior from remembered SDK shapes or documentation
+browsing: check installed versions and relevant official docs, and record
+blocked live probes. Label fixtures. Keep secrets out of specs and evidence.
 
-- Simulator / fake adapter **before** live third-party writes.
-- **Labeled fixtures** for UI/modules that are not real yet.
-- Feature-owned schema vs shared contracts — later slices own their tables; do not migrate the world in one FRED.
-- Cross-cutting controls (pause, budgets, retention) ship **with** the feature that needs them, not as folklore.
-- Human operator checklists for secrets, DNS, dashboards — do not pretend the agent can complete those.
-
-## Bootstrap (only if FRED docs are missing)
-
-Generate from templates with `{{PLACEHOLDERS}}` filled from **this** repo. Never copy another product's FREDs.
-
-Creates:
-
-- `docs/agent-guides/00-AGENT-ENTRYPOINT.md`
-- `docs/features/template.md`
-- `docs/features/OPEN-FRED-INDEX.md`
-- `docs/features/implemented/README.md`
-- optional root `AGENTS.md` pointer
-
-Details: [references/bootstrap.md](references/bootstrap.md).
-
-## Do not
-
-- Treat this skill as product/stack law (no required Next/Clerk/Neon/etc.).
-- Override existing FRED docs with skill defaults.
-- Encode another product's hierarchy, publication order, or FRED 001–N contents.
-- Trust remembered SDK shapes over lockfile + docs.
+Bootstrap creates an entrypoint, FRED template, ROADMAP, and OPERATIONS, plus an
+optional root AGENTS pointer. Migration is explicit and preserves existing
+scope, IDs, history, and verification evidence; see bootstrap guidance.

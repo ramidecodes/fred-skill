@@ -1,80 +1,91 @@
 # FRED methodology
 
-## What a FRED is
+## Slice and readiness
 
-A **Feature Requirement Document** is one implementable slice: goal, contracts, tasks, and acceptance. Not a product bible and not a dump of architecture.
+A FRED is one implementable slice with goal/non-goals, contracts and affected
+surfaces, tasks, implementation criteria, evidence, and delivery links. Add data,
+user-flow, migration, failure/recovery, or operational constraints when needed.
+Drafts can be brief; before Open, resolve decisions needed to implement without
+guessing. The filename is `{NNN}-{kebab-slug}.md`; the title is
+`FRED NNN — Human Name`. Allocate from ROADMAP's next unused ID, considering all
+states and retained history. Never reuse canceled or superseded IDs.
 
-- Filename: `{NNN}-{kebab-case-slug}.md`
-- Title: `FRED NNN — Human Name`
-- Allocate `NNN` from the open index’s **Next FRED number**; never reuse a closed ID.
+The FRED header owns lifecycle state; ROADMAP summarizes it. Status changes
+update both together. OPERATIONS owns task status and delivery evidence.
+Avoid extra counts, per-folder tables, and mandatory dependency diagrams.
 
-## Authority
+## Track planning
 
-1. Product and architecture docs named by the **project entrypoint** own intent and local layout/stack.
-2. **Code** owns runtime truth.
-3. FREDs own how to implement a slice against those two.
+1. Identify bounded outcomes and the surfaces each needs.
+2. Establish shared prerequisites, contract owners, and migration ownership.
+3. Group slices into tracks with minimal cross-track implementation dependencies.
+4. Order work within each track and identify where integration will occur.
+5. Create setup and flow-verification items covering those joins.
 
-If they disagree, say so. Do not silently invent a fourth source of truth.
+Prefer capability tracks over a default frontend/backend split. A track is a
+schedule, not a long-lived branch or automatic multi-agent runtime. Coordinate
+shared-file edits and claims through ROADMAP when work is concurrent.
 
-## Index vs IDs
+Prerequisites distinguish an agreed interface from an available implementation.
+For work against a fake, specify the agreed contract, its owner, the fake's
+limitations, and the real integration responsibility. Check cycles: mutually
+dependent slices usually need a shared contract or a clearer scope split.
 
-`docs/features/OPEN-FRED-INDEX.md` owns:
+## Lifecycle
 
-- Next number
-- Open rows in **execution order** (dependency-valid, not filename order)
-- Depth (draft vs detailed)
-- Dependencies
-- Status / remaining work
-- Recently closed summary
+Draft → Open requires enough scope and contracts to start, not deployed evidence.
+Open → Implemented requires scoped behavior, required local verification, the
+global check gate in SKILL.md, documentation updates, and linked delivery work.
+Implemented → Closed requires that gate again and all applicable delivery and
+required review evidence. A prerequisite need not be Closed to enable coding.
 
-Numeric IDs stay stable when order changes. Independent work may proceed against named fakes only if the task or index allows it.
+Use the project's designated integration baseline: identify the revision or
+working tree. If the project requires a merge before Implemented, unmerged
+branch work remains Open. Do not infer permission to merge or deploy.
 
-## Depth rule
+Readiness is ready / claimed / blocked in ROADMAP, with owner and specific next
+action. Keep a blocked approved slice Open rather than moving it to Draft.
+Each Implemented FRED records its implementation date and pending next action.
+Periodically inspect aging gates, at a cadence appropriate to the project;
+prefer clearing them before starting more work when verification capacity is full.
 
-| Depth | Allowed | Before coding |
-| --- | --- | --- |
-| Draft | User outcomes, authority, acceptance, non-goals | Fill feature-owned SQL/APIs/events/guards/timeouts/recovery against **implemented** dependencies |
-| Detailed / implementable | Exact contracts for this slice | Implement; do not start later FREDs whose deps are missing |
+## Verification boundary
 
-Do not treat a draft as ready because the number is next.
+Implementation acceptance describes behavior the slice owns. Keep necessary
+local tests and integration checks with it, including UI inspection when UI
+changes. Linting/formatting success alone is not behavioral verification.
+Run relevant existing inexpensive automated E2E checks when available.
 
-## Header metadata (every FRED)
+OPERATIONS holds executable setup and shared flow procedures. Create items
+during specification and refine them as implementation clarifies prerequisites.
+Each records owner/executor, what it blocks, target, steps, pass condition,
+status, and evidence. Agent-executable work can be performed by a suitably
+equipped agent within authorization; human access requirements stay explicit.
+Record env names and public key/account identifiers, never secret values.
 
-Required in the file header (before section 1):
+One flow can cover several FREDs; link only gates applicable to each scope.
+Code defects reopen the owning FRED; missing configuration leaves correct code
+Implemented. Optional improvements become follow-up proposals. Revalidate flows
+affected by later contract/code/configuration changes; retain historical evidence
+with its revision and environment rather than claiming it covers changed work.
+Canceled/superseded work gets an explicit disposition and replacement link,
+not a fictitious successful closure.
 
-- Architectural authority → entrypoint
-- Derived from (source pages, prerequisite FREDs)
-- Specification reference (architecture / README as this repo uses)
-- Status
-- Roadmap / stage if the project has one
-- Dependencies (linked FREDs)
+## Living project knowledge
 
-## Template sections
+Architecture owns durable boundaries, state ownership, schemas/interfaces, and
+important decisions. Update affected existing docs with the implementation.
+Label proposed future behavior; resolve deviations rather than blessing them
+after the fact. Link code/generated schema for detail already maintained there.
+Decision records are useful for consequential choices, not mandatory per slice.
 
-The skeleton always includes **all 11 numbered sections**. Fill what the slice needs; leave a short “N/A — …” rather than deleting a section.
+The entrypoint routes to reusable guides only when needed. CI guides identify
+relevant workflows, local equivalents, run/log inspection, and rerun policies.
+Database guides identify environment selection, supported credential sources,
+tenant context, inspection commands, allowed test writes/cleanup, and evidence.
+Preview guides explain startup/access and deployment identification. Reuse
+scripts for repeated mechanics; put one-time setup work in OPERATIONS.
 
-| # | Section | Typical |
-| --- | --- | --- |
-| — | Surfaces Touched | **Mandatory** table of routes/packages/folders |
-| 1 | Goal | **Mandatory** |
-| 2 | User Story | **Mandatory** |
-| 3 | Functional Requirements | **Mandatory** (include non-goals; other 3.x as relevant) |
-| 4 | Data Requirements | **Mandatory** (even if “none”) |
-| 5 | User Flow | **Mandatory** |
-| 6 | Implementation Tasks | **Mandatory** |
-| 7 | Acceptance Criteria | **Mandatory**; 7.1 Test Matrix **recommended** |
-| 8 | Edge Cases | **Mandatory** (table may be empty with one N/A row) |
-| 9 | Non-Functional Requirements | **Mandatory** (or N/A) |
-| 10 | Manual Steps / Rollout | **Mandatory** (operator/secrets/DNS) |
-| 11 | Decisions and Open Validation | **Mandatory** — locked decisions vs local proposals vs blocked live gates |
-
-## Close-out
-
-Follow the **Close-out checklist** in `SKILL.md`. In short: `mv` the file into `implemented/` (no stub), repair every old-path link, drop the open-index row, add recently closed, bump Open/Implemented counts, update mermaid if present, add the `implemented/README.md` Closed row.
-
-## Honesty
-
-- Record blocked live probes (missing credentials, unsigned webhooks, unpaid APIs).
-- Reading docs is not a live validation of a provider.
-- Do not claim APIs from model memory; check the installed version.
-- Label fixtures and simulators so they are not mistaken for production evidence.
+Keep next IDs and scheduling in ROADMAP, detailed slice evidence in FREDs, and
+operation results in OPERATIONS. Do not duplicate command recipes or global
+architecture inside every FRED.

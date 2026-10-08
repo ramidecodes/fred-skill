@@ -1,38 +1,57 @@
-# Bootstrap FRED docs
+# Bootstrap and migration
 
-Use only when the consuming repo **lacks** FRED files (no entrypoint and no `docs/features/`). Never overwrite existing FRED docs with skill defaults.
+## Bootstrap
 
-Ask before writing if the repo already has a different spec system.
+Use when the user requests FRED setup or accepts an offer to bootstrap. Inspect
+existing docs, scripts, and CI first. Reuse project knowledge; do not overwrite
+an existing contract or introduce a competing system without a user request.
+Fill template placeholders from this repository, including the real global
+check command and its working directory. Never copy another product's slices.
 
-## Generate (do not copy another product)
-
-Copy from this skill’s `templates/`, then fill `{{PLACEHOLDERS}}` from **this** repository (name, verify commands, real tree).
-
-| Template | Destination |
+| Template | Project destination |
 | --- | --- |
 | `templates/AGENT-ENTRYPOINT.md` | `docs/agent-guides/00-AGENT-ENTRYPOINT.md` |
 | `templates/feature.md` | `docs/features/template.md` |
-| `templates/OPEN-FRED-INDEX.md` | `docs/features/OPEN-FRED-INDEX.md` |
-| `templates/implemented-README.md` | `docs/features/implemented/README.md` |
+| `templates/ROADMAP.md` | `docs/features/ROADMAP.md` |
+| `templates/OPERATIONS.md` | `docs/features/OPERATIONS.md` |
 
-Optional: root `AGENTS.md` containing only a pointer:
+Optional root AGENTS pointer:
 
 ```markdown
-# Agents
-
-At session start, read [docs/agent-guides/00-AGENT-ENTRYPOINT.md](docs/agent-guides/00-AGENT-ENTRYPOINT.md).
+Agent contract: read docs/agent-guides/00-AGENT-ENTRYPOINT.md at session start.
 ```
 
-If `AGENTS.md` already exists, add that one line; do not replace the file.
+Append to existing AGENTS instructions; do not replace them. Rewrite entrypoint
+pointers for the actual tree. Create architecture/CI/database/preview guides
+only for missing knowledge that materially helps work; otherwise link existing
+docs and maintained scripts. Do not invent stacks or unavailable surfaces.
 
-## Adapt the tree
+The first requested slice uses the next unused ID (001 in a new project), has
+a ROADMAP row, and stays Draft until implementation decisions are sufficiently
+resolved. Create its delivery items in OPERATIONS while specifying it. Stable
+paths cover all four states; no state-folder READMEs or extra counts are needed.
+All subsequent project work edits project copies, not these templates.
 
-The entrypoint template’s layout table is **example-shaped** (`apps/`, `packages/`, `docs/features/`, …). Rewrite it to match disk. Delete rows that do not exist. Do not invent packages.
+## Explicit migration of existing projects
 
-## First FRED
+Existing project contracts remain in force until migration is requested.
 
-If the user wants an initial slice, allocate `001`, add an open-index row, and write `docs/features/001-{{slug}}.md` from `template.md`. Keep it a slice, not the whole product.
+1. Inventory existing FRED IDs, status conventions, evidence, architecture,
+   index/roadmap, and operator checklists. Preserve scope and history.
+2. Consolidate scheduling into ROADMAP, grouped by tracks. Split implementation
+   prerequisites from delivery gates; retain links to source material.
+3. Consolidate outstanding setup and shared-flow work into OPERATIONS with
+   stable task IDs, owners, pass conditions, and FRED links.
+4. Classify FREDs from actual evidence: unfinished scope stays Open; completed
+   local implementation with pending delivery stays Implemented; Closed needs
+   the declared target evidence and check gate. Preserve legacy closure history
+   but mark missing evidence unknown/pending rather than inventing a new pass.
+5. Prefer stable paths. If moving legacy state-folder files, repair incoming
+   and relative links and keep only one authoritative copy. Projects choosing
+   state folders should keep equal depth and avoid per-folder status tables.
+6. Update the entrypoint and references to the new workflow and global check.
+   Retire the old index/status tables once their information is preserved;
+   remove or replace external navigation pointers as needed.
 
-## After bootstrap
-
-All further edits happen on the **project** copies. The skill stays generic.
+Do not mass-close legacy Implemented files, erase genuine deployed evidence,
+or execute deployments just to migrate documentation.

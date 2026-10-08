@@ -1,98 +1,85 @@
 # {{PRODUCT_NAME}} — agent entrypoint
 
-**Product:** {{PRODUCT_NAME}} ({{PRODUCT_URL_OR_N_A}}).  
-**Repo:** {{REPO_OR_PACKAGE_SCOPE}}.
+**Repo:** {{REPO_OR_PACKAGE_SCOPE}}. **Foundation:** {{FOUNDATION_STATUS}}.
 
-Foundation status: {{FOUNDATION_STATUS}}. Do not invent shipped features.
+{{PRODUCT_SOURCE}} owns product intent; {{ARCHITECTURE_DOC}} owns intended
+boundaries and durable contracts. Code establishes what runs. FREDs own slice
+requirements and evidence. Resolve discrepancies explicitly.
 
-**Authority:** {{PRODUCT_SOURCE}} owns product intent. {{ARCHITECTURE_DOC}} owns local stack/layout. **Code** owns what runs. **FREDs** own how to implement a slice. {{REQUIREMENTS_DOC_OR_N_A}} records source reconciliation if used.
+## Project workflow
 
-## Do not
+- Git / PR policy: {{GIT_AND_PR_POLICY}}.
+- Deploy / provisioning policy: {{DEPLOY_AND_PROVISIONING_POLICY}}.
+- Integration baseline for Implemented: {{INTEGRATION_BASELINE_POLICY}}.
+- Independent review requirements: {{REVIEW_POLICY_OR_RISK_BASED}}.
+- Application / command boundaries: {{COMMAND_LAYER_OR_APP_BOUNDARY}}.
 
-- Commit, push, stage, or open PRs unless this conversation explicitly asks. *(Delete or rewrite this bullet if the project wants different git norms — this file wins over the FRED skill default.)*
-- Deploy, provision cloud, or publish unless explicitly asked.
-- Start a later FRED before its listed dependencies exist in code (or the task names an allowed fake).
-- Bypass {{COMMAND_LAYER_OR_APP_BOUNDARY}} from agents, workflows, or UI.
-- Treat documentation browsing as a live provider probe.
-- Trust model training memory for third-party package APIs — versions and docs change.
+Follow applicable AGENTS instructions and existing user authorization. Record
+blocked actions honestly; scheduling a task does not authorize external actions.
+Check third-party APIs against installed versions and their official docs.
+Label fixtures and proposals. Keep secret values out of docs and evidence.
 
-**Human operator tasks:** secrets, DNS, billing, dashboard webhooks, and similar stay on a human checklist ({{OPERATOR_CHECKLIST_LINK_OR_N_A}}). Do not claim those are done from the agent session.
+## Where to go
 
-## Package APIs and docs
-
-Prefer current package docs, repo skills, and official references over remembered SDK shapes. When writing integration code, verify against the **installed** version (lockfile / package manifest) and that version’s docs.
-
-## Where things live
-
-| Need | Go here |
+| Need | Read |
 | --- | --- |
-| Next FRED to build | [OPEN-FRED-INDEX](../features/OPEN-FRED-INDEX.md) execution table — **not** filename order |
-| Why that order | {{ROADMAP_DOC_OR_INDEX}} |
-| System picture | {{ARCHITECTURE_DOC}} |
-| Domain / data model | {{SCHEMA_DOC_OR_N_A}} |
-| Workflows / transitions | {{WORKFLOW_DOC_OR_N_A}} |
-| New FRED shape | [template](../features/template.md) |
-| UI brand / style | {{DESIGN_DOC_OR_N_A}} |
-| Shipped FREDs | [implemented/](../features/implemented/) |
-| Operator / env setup | {{OPERATOR_GUIDES_OR_N_A}} |
+| Choose work, inspect tracks or claims | [ROADMAP](../features/ROADMAP.md) |
+| Setup tasks and shared delivery flows | [OPERATIONS](../features/OPERATIONS.md) |
+| Specify a slice | [FRED template](../features/template.md) |
+| Understand/change system boundaries | {{ARCHITECTURE_DOC}} |
+| Change domain data or shared interfaces | {{SCHEMA_OR_CONTRACT_DOC_OR_N_A}} |
+| Implement UI layout and states | {{DESIGN_DOC_OR_N_A}} |
+| Diagnose CI or verify required workflows | {{CI_GUIDE_OR_EXISTING_CONTRIBUTING_DOC}} |
+| Connect to a database and verify data | {{DATABASE_VERIFICATION_GUIDE_OR_N_A}} |
+| Start/access preview and identify deployment | {{PREVIEW_GUIDE_OR_N_A}} |
 
-Next unused FRED number: **{{NEXT_FRED_NUMBER}}**. Open: {{OPEN_COUNT}}. Implemented: {{IMPLEMENTED_COUNT_AND_IDS}}.
+Load the relevant guide when its task arises. Guides own repeatable procedures;
+OPERATIONS owns outstanding tasks and results. Reuse existing docs and scripts.
 
-## Pick the next FRED
+## Work and lifecycle
 
-1. Open the index. Work the first open row whose dependencies are implemented (or the operator named a specific FRED).
-2. {{START_SEQUENCE_NOTES}}
-3. Drafts: fill feature-owned contracts (schema, events, guards, timeouts, recovery) against shipped dependencies before coding.
-4. When a FRED ships, follow [implemented/README.md](../features/implemented/README.md) (move, fix links, index row/counts, no stub). Do not duplicate the full checklist here.
+Select the requested FRED, or the highest-priority ready, unclaimed Open slice
+in the requested track. Respect implementation prerequisites; an explicitly
+agreed contract and allowed fake may enable parallel work. Record the real
+integration owner. Delivery gates normally block Closed, not coding; setup
+needed for implementation is also an implementation prerequisite.
 
-## Tree
+Keep FRED paths stable. Draft → Open resolves implementation decisions.
+Open → Implemented requires scoped behavior, required local checks, the global
+check below, updated affected documentation, and linked pending delivery gates.
+Implemented → Closed requires the global check and applicable review/setup/flow
+evidence in the declared target. Preview is distinct from production; tooling
+and libraries use relevant integration evidence. Update FRED and ROADMAP
+summaries together. Code defects reopen work; configuration blockers leave
+correct implementations Implemented with a linked next action.
 
-High-level layout only (generated/vendor dirs omitted). Architecture docs own intended system law; this map is **what exists on disk**. Adapt folders to this repo; delete rows that are not present.
+## Global check — required before implementation handoff/sign-off
 
-```text
-.
-├── apps/                    # deployable application roots (adapt names)
-│   ├── app/                 # example: primary product
-│   └── {{OTHER_APP_OR_OMIT}}
-├── services/                # example: workers, agents, orchestration (or omit)
-├── packages/                # example: shared libraries (or omit)
-├── docs/
-│   ├── agent-guides/        # this entrypoint + operator guides
-│   ├── architecture/        # stack, schema, workflow law
-│   ├── deploy/              # optional deploy map
-│   └── features/            # open FREDs; implemented/ when shipped
-├── .agents/skills/          # optional repo agent skills
-├── .cursor/rules/           # optional always-on editor rules
-├── .github/workflows/       # optional CI
-├── scripts/                 # optional repo scripts
-├── {{LOCKFILE_OR_WORKSPACE_MANIFEST}}
-└── {{ENV_EXAMPLE}}          # env **names** only; never commit secrets
-```
-
-**What goes where** *(rewrite to match this repo)*
-
-- `apps/` — deployable UI/API roots. Tests for an app typically live with that app.
-- `services/` — long-running or worker roots if the repo has them.
-- `packages/` — shared libraries. Prefer no connect-on-import in libraries.
-- `docs/` — agent orientation, architecture, FRED specs. Next work: `docs/features/OPEN-FRED-INDEX.md`, not filename order.
-- `.agents/skills/` — skills used while implementing. `.cursor/rules/` — always-on agent rules.
-- CI and root tooling — as this repo actually uses.
-- Copy env **names** from `{{ENV_EXAMPLE}}`; do not document secret values.
-
-Stack: {{STACK_SUMMARY}}. Hierarchy / domain model: {{DOMAIN_HIERARCHY_OR_N_A}}.
-
-## Verify
-
-Replace with this repo’s real commands:
+**Working directory:** `{{GLOBAL_CHECK_WORKING_DIRECTORY}}`.
+**Command:**
 
 ```bash
-{{INSTALL_COMMAND}}
-{{FORMAT_COMMAND}}
-{{CHECK_COMMAND}}
-{{BUILD_COMMAND}}
-{{SMOKE_OR_TEST_COMMAND}}
+{{GLOBAL_CHECK_COMMAND}}
 ```
 
-After implementing a slice, run `{{CHECK_COMMAND}}` (or the project equivalent) before considering the work done.
+This is the project-wide lint/format check. In a monorepo it cascades through
+all applicable modules. Run it before handing implementation to review and
+before marking a FRED Implemented or Closed. A module-only check is insufficient.
+Require success on the current work, rerun after subsequent changes to check
+inputs, and record command, directory/scope, result, date, and revision or
+working-tree context in the FRED. A missing, blocked, or failing command blocks
+sign-off; report the cause and next action instead of marking it passed.
+Planning-only Draft → Open does not require executing code checks.
 
-Record blocked live probes honestly. Libraries should not connect on import unless this repo documents otherwise. Deploy map: {{DEPLOY_DOC_OR_N_A}}.
+Also run the FRED's proportionate behavioral checks; lint/format is not proof
+of correct behavior. UI changes require rendering and inspecting the changed
+surface, layout, responsive behavior, and relevant states. Keep local rule,
+authorization, persistence, and necessary integration verification with the
+implementation. Shared deployed journeys and external setup go in OPERATIONS.
+
+Other relevant commands/procedures: {{BUILD_TEST_AND_LOCAL_RUN_REFERENCES}}.
+Actual tree/stack pointers: {{PROJECT_LAYOUT_AND_STACK_REFERENCES}}.
+
+Update existing architecture docs for changed durable contracts and boundaries,
+and guides for changed procedures, before Implemented sign-off. Do not duplicate
+architecture or connection recipes in each FRED.
