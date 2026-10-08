@@ -47,7 +47,9 @@ stages need no separate skills; manual invocation does not expand authorization.
 ## Work and lifecycle
 
 Select the requested FRED, or the highest-priority ready, unclaimed Open slice
-in the requested track. Respect implementation prerequisites; an explicitly
+in the requested or roadmap-designated active track; use cross-track priority
+only when neither is designated. Report a selected track's lack of eligible
+work rather than silently switching. Respect implementation prerequisites; an explicitly
 agreed contract and allowed fake may enable parallel work. Record the real
 integration owner. Delivery gates normally block Closed, not coding; setup
 needed for implementation is also an implementation prerequisite.

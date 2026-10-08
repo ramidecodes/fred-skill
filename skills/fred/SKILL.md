@@ -1,11 +1,10 @@
 ---
 name: fred
 description: >-
-  Plan, implement, and review repository features using Feature Requirement
-  Documents (FREDs), parallel implementation tracks, and delivery checklists.
-  Use when writing or implementing a FRED, choosing the next slice, coordinating
-  tracks, bootstrapping FRED documentation, or reviewing against a project agent
-  entrypoint. Applies to software work in the current repository.
+  Bootstrap, migrate, and maintain the FRED methodology in a software
+  repository. Use to set up FRED documents, coordinate parallel tracks, manage
+  delivery gates, or review the project workflow. Routine slice specification
+  and coding use create-fred and implement-fred when available.
 ---
 
 # FRED
@@ -14,6 +13,14 @@ description: >-
 
 This skill supplies methodology and templates. Existing project documents and
 user instructions govern the consuming repository; templates are seeds.
+
+For routine tasks, use available `create-fred` to gather requirements and write
+or refine a slice, and `implement-fred` to select and execute agreed work.
+Those skills read the consuming project's contract directly. Do not assume
+optional siblings are installed or resolve them through relative source paths.
+When only `fred` is available, its template and references still support these
+tasks. Bootstrap and migration remain here; no model change or delegation is
+implied by selecting a skill.
 
 ## Start and route
 
@@ -94,7 +101,9 @@ an integrated outcome promised by the slice.
   or implement behavior must also be named as an implementation prerequisite.
   Downstream work need not wait for prerequisites to be Closed.
 - For “next,” choose the highest-priority ready, unclaimed Open slice in the
-  requested track, or across tracks if none is named. Respect a named FRED's
+  requested or roadmap-designated active track, or across tracks if neither is
+  named. If that track has no eligible work, report its blocker rather than
+  silently switching. Respect a named FRED's
   prerequisites. Readiness, claims, and blockers are roadmap fields, not states.
 - Track scheduling does not authorize delegation, Git actions, or deployment.
 
@@ -143,11 +152,14 @@ scope, IDs, history, and verification evidence; see bootstrap guidance.
 
 ## Optional companion skills
 
-Keep ordinary lifecycle stages in this skill and its on-demand references.
+The package includes `create-fred` and `implement-fred` for the recurring
+specification and coding workflows. Shared project rules live in the entrypoint
+and project documents; companions load the task guidance they need.
 Consider a separate skill only for a recurring, distinct workflow with clear
 inputs, outputs, and invocation boundaries. Project guides remain authority;
 companions consume them and write results into existing FRED/OPERATIONS files.
 Keep FRED usable without companions, and preserve its global check gate.
 For candidate workflows, packaging versus project-local placement, and manual
 invocation policies, read [references/project-skills.md](references/project-skills.md)
-when evaluating or adding skills. Do not bootstrap a suite by default.
+when evaluating or adding further skills. Do not bootstrap a project skill suite
+by default.

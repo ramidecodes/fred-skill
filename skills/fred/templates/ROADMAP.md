@@ -1,6 +1,7 @@
 # {{PRODUCT_NAME}} — FRED roadmap
 
 **Updated:** {{DATE}}. **Next unused FRED ID:** `{{NEXT_NNN}}`.
+**Active / focus track:** {{TRACK_OR_NONE}}.
 
 [Entrypoint](../agent-guides/00-AGENT-ENTRYPOINT.md) owns project workflow.
 FRED headers own detailed lifecycle state and evidence; this roadmap summarizes
@@ -21,8 +22,10 @@ are stable identity, not execution order. A diagram is optional.
 ## Selection and maintenance
 
 - Choose the named FRED, respecting prerequisites. For “next,” take the
-  highest-priority ready, unclaimed Open slice in the requested track, or across
-  tracks if none is named. Claim work when coordinating concurrent execution.
+  highest-priority ready, unclaimed Open slice in the requested or designated
+  active track, or across tracks if neither is named. If the selected track has
+  no eligible work, report its blocker rather than silently switching. Claim
+  work when coordinating concurrent execution.
 - An agreed contract plus explicitly allowed fake can enable parallel coding;
   name assumptions and the owner of real integration. Prerequisites need not
   be Closed. Setup needed for coding is an implementation prerequisite too.

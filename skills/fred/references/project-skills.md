@@ -1,7 +1,8 @@
 # Optional companion and project skills
 
 Read when deciding whether to add skills to this package or a consuming project.
-The default remains one FRED skill with on-demand references and project guides.
+The package includes `fred`, `create-fred`, and `implement-fred`. Project rules
+remain in the consuming entrypoint/documents, with further detail loaded on demand.
 
 ## Decide whether a skill adds value
 
@@ -13,12 +14,26 @@ An invocable skill can load its procedure only when relevant, but overlapping
 descriptions still create routing and maintenance costs. Start with the smallest
 useful set and expand from observed repeated work.
 
-Do not create one skill per lifecycle state, FRED, track, or submodule. Ordinary
-specification/implementation/closure already work through FRED and its references.
+The recurring creation and implementation tasks have distinct conversational
+and execution workflows, so they are packaged separately. Further skills need
+their own demonstrated use; do not add one per state, FRED, track, or submodule.
 Names should identify a workflow; narrow descriptions should distinguish it
 from the core skill. Companions remain optional and preserve lifecycle/check gates.
 
 ## Candidates and recommendation
+
+| Packaged skill | Inputs → result |
+| --- | --- |
+| `fred` | Project/workflow request → bootstrap, migration, track/gate coordination |
+| `create-fred` | Feature idea or Draft + project context → scoped Draft/Open specification, roadmap and operation links |
+| `implement-fred` | Named FRED or next/track request + project contract → implemented slice with evidence, or precise blocker/resume notes |
+
+The task skills are self-contained consumers of project documents, with no
+assumed sibling installation. They do not select different models automatically.
+Their descriptions route ordinary creation and coding away from the core;
+the core still supports those tasks when explicitly invoked or installed alone.
+
+Further candidates:
 
 | Candidate | Inputs → result | Where it fits / when worthwhile |
 | --- | --- | --- |
@@ -27,10 +42,9 @@ from the core skill. Companions remain optional and preserve lifecycle/check gat
 | `project-ci-diagnose` | Revision/run or failure + CI guide → diagnosed cause and scoped remedy | Project-local when log analysis and remediation recur; a simple check command alone needs no skill. |
 | `project-data-verify` | Expected behavior + target/tenant + DB guide → relevant data evidence | Project-local when data inspection needs repeatable judgment beyond an existing script. |
 
-These names are illustrative proposals, not installed skills. An additional
-planning or bootstrap skill is warranted only if that workflow becomes large
-and independently useful; references are sufficient initially. Avoid extracting
-review merely to force expensive models or adding all candidates as a suite.
+The further candidates are illustrative proposals, not packaged skills.
+Bootstrap remains in `fred`. Avoid extracting review merely to force expensive
+models or adding all further candidates as a suite.
 
 Invoking a review skill selects instructions; it does not itself select a
 stronger model or create an independent reviewer context. When independence

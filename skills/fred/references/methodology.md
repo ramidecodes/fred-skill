@@ -45,6 +45,10 @@ branch work remains Open. Do not infer permission to merge or deploy.
 
 Readiness is ready / claimed / blocked in ROADMAP, with owner and specific next
 action. Keep a blocked approved slice Open rather than moving it to Draft.
+ROADMAP may designate an active/focus track. Selection honors the user-named
+FRED or requested track first, then that designation; absent either, use
+cross-track priority. A selected track with no eligible work gets a precise
+blocker/completion report rather than an unannounced switch.
 Each Implemented FRED records its implementation date and pending next action.
 Periodically inspect aging gates, at a cadence appropriate to the project;
 prefer clearing them before starting more work when verification capacity is full.

@@ -83,19 +83,34 @@ Changes to acceptance, verification scripts, or CI/global-check coverage need
 a recorded rationale and review alongside the implementation. Do not weaken
 verification merely to obtain a pass.
 
-## Optional skills for recurring workflows
+## Skills in this package
 
-Keep `fred` as the core methodology. Its on-demand references cover normal
-planning, implementation, and closure. Add companions only when a distinct
-workflow repeatedly benefits from its own invocation and judgment. Guides own
-project facts/procedures; scripts handle repeated mechanics; skills coordinate
-the task and write results into existing FRED/OPERATIONS files.
+| Skill | Use it for | Output |
+| --- | --- | --- |
+| [create-fred](skills/create-fred/SKILL.md) | Gather requirements, research relevant contracts, ask focused questions, create/refine a slice | Draft/Open FRED, roadmap row, applicable operation items |
+| [implement-fred](skills/implement-fred/SKILL.md) | Implement a named FRED or pick the next ready slice in the requested/active track | Implemented slice with check evidence, or explicit blocker/resume notes |
+| [fred](skills/fred/SKILL.md) | Bootstrap, migration, track coordination, and methodology/workflow review | Project contract and maintained framework documents |
 
-Independent FRED review is the first candidate for a reusable companion.
+For the usual workflow, alternate between `create-fred` and `implement-fred`.
+Creation is conversational but does not require an interview for a clear request.
+Implementation normally completes one agreed slice and ends at Implemented;
+combined deployed flows remain explicit in OPERATIONS. The roadmap can designate
+an active/focus track. A blocked selected track is reported rather than silently
+replaced by another track.
+
+All three skills read project documents as authority. The task skills do not
+depend on sibling files surviving selective installation. `fred` can still
+support ordinary slice work when installed alone or explicitly invoked. Skill
+selection does not automatically change model or launch an independent agent.
+
+Add further companions only when a distinct workflow repeatedly benefits from
+its own invocation and judgment. Guides own project facts/procedures; scripts
+handle repeated mechanics; skills write results into existing documents.
+Independent FRED review is a potential further reusable companion.
 Delivery-flow execution, CI diagnosis, and database evidence collection are
 better project-local candidates when they need environment-specific guidance.
-These are proposals, not extra skills installed by this package. Do not generate
-a suite or one skill per lifecycle stage by default.
+Those further candidates are proposals, not packaged skills. Do not generate
+a project skill suite or one skill per lifecycle stage by default.
 
 Companions can be manually invoked using the host's supported policy. Keep
 ordinary FRED discovery available, avoid automatic chaining of manual-only
@@ -129,6 +144,12 @@ Same source, full GitHub URL, skill named `fred` only:
 npx skills add https://github.com/ramidecodes/fred-skill --skill fred
 ```
 
+Select the three packaged skills explicitly:
+
+```bash
+npx skills add ramidecodes/fred-skill --skill fred --skill create-fred --skill implement-fred
+```
+
 Global (user-level, all projects):
 
 ```bash
@@ -141,9 +162,20 @@ From a local clone:
 npx skills add /path/to/fred-skill
 ```
 
-Equivalents documented by the CLI: `owner/repo@fred`, or `--skill fred` (short `-s`). Default install is project-local. The CLI discovers `skills/fred/SKILL.md`.
+Install/update all three globally from the current checkout:
 
-Auto-invoke is best-effort: the skill omits `disable-model-invocation`, and the description is written for FRED work in a repository. Cursor cannot guarantee 100% load. Pair install with a pointer so teammates without the skill still get the contract:
+```bash
+npx skills add . -g --skill fred --skill create-fred --skill implement-fred
+```
+
+Default installation is project-local; `-g` selects global installation. The
+CLI discovers each `skills/<name>/SKILL.md`. See the
+[Skills CLI documentation](https://github.com/vercel-labs/skills) for agent
+selection and other installation options.
+
+The skills support manual invocation and normal automatic discovery through
+their distinct descriptions; host behavior varies. Pair installation with a
+pointer so teammates without the skills still get the project contract:
 
 ```markdown
 Agent contract: read docs/agent-guides/00-AGENT-ENTRYPOINT.md at session start.
@@ -158,25 +190,27 @@ Existing project contracts remain authoritative. Legacy open indexes and state f
 ## Typical prompts
 
 ```text
-Users can invite people by email. Write a FRED for that, then we'll implement.
+$create-fred Users can invite people by email. Help define a slice and its checks.
 
-What's the next feature to implement?
+$implement-fred Implement the next ready FRED in the active track.
 
-Add a FRED for export-to-CSV. Keep it a slice, not the whole reporting suite.
+$create-fred Refine our export-to-CSV Draft. Keep it a slice, not the reporting suite.
 
-We're missing FRED docs in this repo. Bootstrap them from the skill templates.
+$fred Bootstrap FRED docs in this repo from the skill templates.
 
-Implement the next ready FRED in the reporting track. Run the global check before handoff.
+$implement-fred Implement FRED 012. Run the global check before handoff.
 
 Review this Implemented FRED against its code and evidence. Separate required fixes from suggestions.
 
-Migrate our FRED index to tracks, and collect pending setup and UX checks in OPERATIONS.
+$fred Migrate our index to tracks and collect pending setup/UX checks in OPERATIONS.
 ```
 
 ## For humans vs for agents
 
 - **This README** is the idea: why FRED, how implementation and delivery verification fit together, how to install.
-- `skills/fred/SKILL.md` is agent procedure: project authority, lifecycle gates, tracks, and document responsibilities.
+- `skills/fred/SKILL.md` owns methodology, bootstrap, migration, and coordination.
+- `skills/create-fred/SKILL.md` guides requirement gathering and specification.
+- `skills/implement-fred/SKILL.md` guides work selection, implementation, and verification.
 - `skills/fred/references/` is detail (methodology, workflow, bootstrap) loaded when needed.
 - `skills/fred/templates/` is what gets copied into a consuming repo, then edited there.
 

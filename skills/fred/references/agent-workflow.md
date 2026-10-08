@@ -3,7 +3,9 @@
 ## Choose and prepare
 
 Read the project contract, ROADMAP, and the named or highest-priority ready,
-unclaimed Open FRED in the requested track. Check implementation prerequisites,
+unclaimed Open FRED in the requested or roadmap-designated active track. Use
+cross-track priority only when neither is designated. If that track has no
+eligible work, report its blocker rather than silently switching. Check implementation prerequisites,
 including explicitly agreed interfaces/fakes. Deepen Draft scope before coding.
 Claim work and record next action when coordinating concurrent implementation.
 Read only relevant architecture and procedure guides; discover missing pointers.

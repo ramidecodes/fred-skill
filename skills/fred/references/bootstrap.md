@@ -33,6 +33,9 @@ invent an environment launcher or run it during planning-only sessions.
 Do not generate companion skills by default. When the user wants recurring
 procedures packaged as skills, use the optional companion guidance linked from
 SKILL.md, preserving existing guides as authority and host invocation policies.
+If `create-fred` and `implement-fred` are available, list their creation and
+execution roles in the project entrypoint without assuming they are installed.
+Bootstrap does not copy their definitions into the consuming project.
 
 The first requested slice uses the next unused ID (001 in a new project), has
 a ROADMAP row, and stays Draft until implementation decisions are sufficiently
