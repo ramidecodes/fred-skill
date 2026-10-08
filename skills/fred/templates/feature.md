@@ -42,6 +42,10 @@ Keep requirements here; shared verification execution steps live in OPERATIONS. 
 persistence, contracts, and local integration. Existing cheap relevant E2E
 checks still run. Never quietly weaken criteria to fit the implementation. -->
 
+<!-- Changes to acceptance, verification scripts, or CI/global-check coverage
+need a recorded rationale under the project decision process. Review those
+changes with the feature; do not disable checks merely to obtain a pass. -->
+
 ## Verification and handoff evidence
 
 **Integration baseline:** {{REVISION_OR_WORKING_TREE_CONTEXT}}
@@ -76,3 +80,13 @@ proof. Configuration blockers leave correct code Implemented; code defects reope
 
 <!-- Add decisions/open questions only when needed. Record justified scope
 changes and source decisions; optional improvements become follow-up proposals. -->
+
+<!-- Optional Resume notes: include only when work stops unfinished or changes
+hands. Keep a concise current summary, not a session log:
+Last worked: date and revision / working-tree context
+Completed / remaining: actual work and immediate unfinished tasks
+Verification: passed, failed, and not-run checks; link existing evidence
+Blocker: specific cause or none
+Next action / owner: concrete step and current claim
+On resume, compare notes with the checkout and relevant environment. Remove
+resolved temporary notes or fold durable facts into the sections above. -->

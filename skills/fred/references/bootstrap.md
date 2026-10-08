@@ -26,6 +26,14 @@ pointers for the actual tree. Create architecture/CI/database/preview guides
 only for missing knowledge that materially helps work; otherwise link existing
 docs and maintained scripts. Do not invent stacks or unavailable surfaces.
 
+Route guides by task, section, and responsibility in the entrypoint. Summaries
+help discovery but never replace the linked source. Document maintained startup,
+test-data setup, and smoke commands where repeated work needs them; do not
+invent an environment launcher or run it during planning-only sessions.
+Do not generate companion skills by default. When the user wants recurring
+procedures packaged as skills, use the optional companion guidance linked from
+SKILL.md, preserving existing guides as authority and host invocation policies.
+
 The first requested slice uses the next unused ID (001 in a new project), has
 a ROADMAP row, and stays Draft until implementation decisions are sufficiently
 resolved. Create its delivery items in OPERATIONS while specifying it. Stable

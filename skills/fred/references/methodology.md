@@ -86,6 +86,13 @@ tenant context, inspection commands, allowed test writes/cleanup, and evidence.
 Preview guides explain startup/access and deployment identification. Reuse
 scripts for repeated mechanics; put one-time setup work in OPERATIONS.
 
+Make routing descriptions identify when to read a document, which section is
+relevant, and what it owns. Use source links rather than copying contracts into
+summaries; a source update should not require editing several parallel indexes.
+Keep knowledge navigation separate from the implementation dependency graph.
+Optional companion skills orchestrate a repeated task using guides/scripts;
+they do not become a competing source of architecture, status, or permissions.
+
 Keep next IDs and scheduling in ROADMAP, detailed slice evidence in FREDs, and
 operation results in OPERATIONS. Do not duplicate command recipes or global
 architecture inside every FRED.

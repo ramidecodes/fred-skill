@@ -24,7 +24,9 @@ user instructions govern the consuming repository; templates are seeds.
    `docs/features/ROADMAP.md` and the relevant FRED. For setup or delivery
    verification, also read the linked items in `docs/features/OPERATIONS.md`.
 3. Load architecture and procedure guides relevant to the task through those
-   pointers; discover missing relevant documentation when necessary.
+   pointers. Route by task, document responsibility, and section; read the
+   source before relying on its contracts. Summaries aid discovery, not authority.
+   Discover missing relevant documentation when necessary.
 4. If FRED docs are absent and the user wants this methodology, use
    [references/bootstrap.md](references/bootstrap.md). Offer bootstrap when it
    has not been requested. Do not impose a competing spec system.
@@ -120,6 +122,15 @@ or authorize paid model calls. Record required corrections separately from
 delivery gaps and optional improvements. Document and justify scope changes;
 never quietly weaken acceptance. Review approval does not replace execution.
 
+Changes to acceptance, verification scripts, or CI/global-check scope need a
+recorded rationale under the project's decision process. Do not disable checks
+or narrow coverage just to obtain a pass; reviewers inspect these changes too.
+
+When stopping with unfinished work or handing it off, leave concise resume
+notes in the FRED: baseline, completed/remaining work, checks, blocker, and next
+action. Refresh the current summary rather than adding a session transcript.
+On resume, compare notes with the actual checkout and relevant environment.
+
 Follow the project's Git/deploy rules and existing conversation authorization.
 If silent, do not commit, push, open PRs, or deploy without a user request.
 Do not claim provider behavior from remembered SDK shapes or documentation
@@ -129,3 +140,14 @@ blocked live probes. Label fixtures. Keep secrets out of specs and evidence.
 Bootstrap creates an entrypoint, FRED template, ROADMAP, and OPERATIONS, plus an
 optional root AGENTS pointer. Migration is explicit and preserves existing
 scope, IDs, history, and verification evidence; see bootstrap guidance.
+
+## Optional companion skills
+
+Keep ordinary lifecycle stages in this skill and its on-demand references.
+Consider a separate skill only for a recurring, distinct workflow with clear
+inputs, outputs, and invocation boundaries. Project guides remain authority;
+companions consume them and write results into existing FRED/OPERATIONS files.
+Keep FRED usable without companions, and preserve its global check gate.
+For candidate workflows, packaging versus project-local placement, and manual
+invocation policies, read [references/project-skills.md](references/project-skills.md)
+when evaluating or adding skills. Do not bootstrap a suite by default.

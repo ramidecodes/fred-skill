@@ -8,6 +8,13 @@ including explicitly agreed interfaces/fakes. Deepen Draft scope before coding.
 Claim work and record next action when coordinating concurrent implementation.
 Read only relevant architecture and procedure guides; discover missing pointers.
 
+Use entrypoint descriptions and section links to find the needed source, then
+read it. On resumed work, inspect the actual checkout and local changes against
+the FRED's baseline/resume notes. Confirm relevant environment state when
+uncertain; old notes do not prove a server, database, or deployment is current.
+Use maintained setup and smoke commands when this is needed for the task, not
+as an automatic startup requirement for planning sessions.
+
 Confirm the global check command and its working directory from the entrypoint
 and actual project tooling. It should invoke the project's aggregate lint and
 format checks, cascading through modules in a monorepo. Do not substitute a
@@ -40,12 +47,33 @@ Global checks are necessary but do not replace behavior checks, independent
 review, or deployed evidence. Routine documentation edits recording results
 need not cause an endless check loop; rerun if they affect check inputs.
 
+## Pause and resume
+
+When unfinished work stops or changes hands, refresh a short Resume notes
+section in its FRED: date and baseline, completed and remaining work, check
+results including not-run checks, blocker, and the next concrete action. Point
+to existing evidence rather than duplicating logs. Keep the lifecycle state
+honest; pausing does not earn Implemented. Update ROADMAP's next action and
+claim/owner to show whether work remains claimed or is available for pickup.
+Resolve an ambiguous existing claim before taking concurrent ownership.
+
+Omit resume notes for a short slice finished in one session. Remove resolved
+temporary notes or fold durable facts into the appropriate sections. Keep
+secrets out of notes, and verify their baseline before resuming.
+
 ## Independent review when applicable
 
 Use project/user review requirements; otherwise select based on consequence
 and uncertainty. A separate reviewer or stronger available model can inspect
 the FRED, actual diff/code, relevant architecture, and local evidence. Do not
 launch delegation or change model/cost settings without applicable authorization.
+
+Inspect changes to criteria, test assertions/fixtures, verification scripts,
+and CI/global-check coverage alongside feature code. Require a recorded reason
+for contract/gate changes. A legitimate correction can change verification;
+disabling or weakening it merely to make failing behavior pass is a defect.
+Review findings should cite actual code and evidence, not just repeat the
+implementation agent's completion summary.
 
 Append a concise review record to the FRED:
 

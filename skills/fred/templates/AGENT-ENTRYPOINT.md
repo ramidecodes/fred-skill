@@ -21,20 +21,28 @@ Label fixtures and proposals. Keep secret values out of docs and evidence.
 
 ## Where to go
 
-| Need | Read |
-| --- | --- |
-| Choose work, inspect tracks or claims | [ROADMAP](../features/ROADMAP.md) |
-| Setup tasks and shared delivery flows | [OPERATIONS](../features/OPERATIONS.md) |
-| Specify a slice | [FRED template](../features/template.md) |
-| Understand/change system boundaries | {{ARCHITECTURE_DOC}} |
-| Change domain data or shared interfaces | {{SCHEMA_OR_CONTRACT_DOC_OR_N_A}} |
-| Implement UI layout and states | {{DESIGN_DOC_OR_N_A}} |
-| Diagnose CI or verify required workflows | {{CI_GUIDE_OR_EXISTING_CONTRIBUTING_DOC}} |
-| Connect to a database and verify data | {{DATABASE_VERIFICATION_GUIDE_OR_N_A}} |
-| Start/access preview and identify deployment | {{PREVIEW_GUIDE_OR_N_A}} |
+| When needed | Document / relevant section | What it owns |
+| --- | --- | --- |
+| Choose work, inspect tracks or claims | [ROADMAP](../features/ROADMAP.md) | Scheduling, prerequisites, next actions |
+| Execute setup or shared delivery flows | [OPERATIONS](../features/OPERATIONS.md) | Task steps, pass conditions, results |
+| Specify a slice | [FRED template](../features/template.md) | Slice requirements and evidence shape |
+| Understand/change system boundaries | {{ARCHITECTURE_DOC}} | Durable system boundaries and decisions |
+| Change domain data or shared interfaces | {{SCHEMA_OR_CONTRACT_DOC_OR_N_A}} | State ownership and canonical contracts |
+| Implement UI layout and states | {{DESIGN_DOC_OR_N_A}} | Design requirements |
+| Diagnose CI or verify required workflows | {{CI_GUIDE_OR_EXISTING_CONTRIBUTING_DOC}} | Workflows, commands, run/log inspection |
+| Connect to a database and verify data | {{DATABASE_VERIFICATION_GUIDE_OR_N_A}} | Environment selection and data inspection |
+| Start/access preview and identify deployment | {{PREVIEW_GUIDE_OR_N_A}} | Startup, access, smoke checks, deployment context |
 
 Load the relevant guide when its task arises. Guides own repeatable procedures;
 OPERATIONS owns outstanding tasks and results. Reuse existing docs and scripts.
+Use section links where useful. Routing summaries help select sources; read
+the source before relying on its contract. Avoid a separate index until scale
+or repeated discovery failures justify one.
+
+When recurring procedures warrant optional project skills, list only available
+skills here with their trigger, invocation policy, and inputs/results. They
+reuse these guides and write evidence into existing documents. Ordinary FRED
+stages need no separate skills; manual invocation does not expand authorization.
 
 ## Work and lifecycle
 
@@ -53,6 +61,10 @@ and libraries use relevant integration evidence. Update FRED and ROADMAP
 summaries together. Code defects reopen work; configuration blockers leave
 correct implementations Implemented with a linked next action.
 
+When unfinished work stops, leave concise resume notes in the FRED and update
+ROADMAP's owner/claim and next action. On resume, compare the recorded baseline
+with the checkout and local changes; confirm relevant environment state.
+
 ## Global check — required before implementation handoff/sign-off
 
 **Working directory:** `{{GLOBAL_CHECK_WORKING_DIRECTORY}}`.
@@ -70,6 +82,10 @@ inputs, and record command, directory/scope, result, date, and revision or
 working-tree context in the FRED. A missing, blocked, or failing command blocks
 sign-off; report the cause and next action instead of marking it passed.
 Planning-only Draft → Open does not require executing code checks.
+
+Record and justify changes to acceptance, check scripts, or CI/global-check
+scope. Review those changes with the implementation; do not disable or weaken
+verification just to obtain a passing sign-off.
 
 Also run the FRED's proportionate behavioral checks; lint/format is not proof
 of correct behavior. UI changes require rendering and inspecting the changed

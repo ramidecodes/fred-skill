@@ -73,6 +73,36 @@ This skill's templates are seeds. Existing project documents govern the repo.
 Architecture and CI/database/preview guides are added only when useful; link
 existing documentation and maintained scripts instead of creating duplicates.
 
+The entrypoint's routing table names when to read each source, its relevant
+section, and what it owns. Read source contracts rather than treating summaries
+as authority. When work stops unfinished, leave concise resume notes in the
+FRED and update the roadmap claim/next action. The next session compares those
+notes with the actual checkout and relevant environment before continuing.
+
+Changes to acceptance, verification scripts, or CI/global-check coverage need
+a recorded rationale and review alongside the implementation. Do not weaken
+verification merely to obtain a pass.
+
+## Optional skills for recurring workflows
+
+Keep `fred` as the core methodology. Its on-demand references cover normal
+planning, implementation, and closure. Add companions only when a distinct
+workflow repeatedly benefits from its own invocation and judgment. Guides own
+project facts/procedures; scripts handle repeated mechanics; skills coordinate
+the task and write results into existing FRED/OPERATIONS files.
+
+Independent FRED review is the first candidate for a reusable companion.
+Delivery-flow execution, CI diagnosis, and database evidence collection are
+better project-local candidates when they need environment-specific guidance.
+These are proposals, not extra skills installed by this package. Do not generate
+a suite or one skill per lifecycle stage by default.
+
+Companions can be manually invoked using the host's supported policy. Keep
+ordinary FRED discovery available, avoid automatic chaining of manual-only
+skills, and preserve the global check requirement. See the
+[companion evaluation](skills/fred/references/project-skills.md) for selection,
+placement, inputs/results, and host-specific invocation settings.
+
 ## When to use
 
 - You are building or planning software in a repository and want features as versioned docs an agent can follow.
