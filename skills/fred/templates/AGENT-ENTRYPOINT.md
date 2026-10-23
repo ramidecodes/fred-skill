@@ -8,7 +8,7 @@ requirements and evidence. Resolve discrepancies explicitly.
 
 ## Project workflow
 
-- Git / PR policy: {{GIT_AND_PR_POLICY}}.
+- Git / PR policy: Conventional Commits when the user authorizes commits.
 - Deploy / provisioning policy: {{DEPLOY_AND_PROVISIONING_POLICY}}.
 - Integration baseline for Implemented: {{INTEGRATION_BASELINE_POLICY}}.
 - Independent review requirements: {{REVIEW_POLICY_OR_RISK_BASED}}.
@@ -90,10 +90,13 @@ scope. Review those changes with the implementation; do not disable or weaken
 verification just to obtain a passing sign-off.
 
 Also run the FRED's proportionate behavioral checks; lint/format is not proof
-of correct behavior. UI changes require rendering and inspecting the changed
-surface, layout, responsive behavior, and relevant states. Keep local rule,
-authorization, persistence, and necessary integration verification with the
-implementation. Shared deployed journeys and external setup go in OPERATIONS.
+of correct behavior. After the global check, run additional QA (including
+browser or render inspection when relevant) only when the FRED's verification
+criteria or QA section calls for it. Prefer available browser tooling for
+UI/browser-shaped checks; if tooling, auth, or environment is missing, report
+not-run honestly. Keep necessary local rule, authorization, persistence, and
+integration verification with the implementation when the FRED requires them.
+Shared deployed journeys and external setup go in OPERATIONS.
 
 Other relevant commands/procedures: {{BUILD_TEST_AND_LOCAL_RUN_REFERENCES}}.
 Actual tree/stack pointers: {{PROJECT_LAYOUT_AND_STACK_REFERENCES}}.

@@ -56,8 +56,9 @@ prefer clearing them before starting more work when verification capacity is ful
 ## Verification boundary
 
 Implementation acceptance describes behavior the slice owns. Keep necessary
-local tests and integration checks with it, including UI inspection when UI
-changes. Linting/formatting success alone is not behavioral verification.
+local tests and integration checks with it. Additional QA (including browser
+or render inspection) runs only when the FRED's verification criteria call for
+it. Linting/formatting success alone is not behavioral verification.
 Run relevant existing inexpensive automated E2E checks when available.
 
 OPERATIONS holds executable setup and shared flow procedures. Create items

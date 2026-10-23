@@ -36,11 +36,13 @@ setup or a combined deployed journey remains pending.
    production; libraries/tooling use relevant integration evidence.
 
 Missing, blocked, or failing global checks block sign-off. Rerun after changes
-to check inputs. Behavioral checks still matter: UI implementation requires
-rendering and inspection, and backend slices require appropriate rule,
-authorization, persistence, and integration checks. Shared deployed journeys
-and third-party setup live separately so correct implementation can progress.
-Planning-only Draft → Open does not require executing code checks.
+to check inputs. Behavioral checks still matter: after the global check, run
+additional QA (including browser or render inspection when relevant) only when
+the FRED's verification criteria call for it; backend slices require
+appropriate rule, authorization, persistence, and integration checks when
+those criteria apply. Shared deployed journeys and third-party setup live
+separately so correct implementation can progress. Planning-only Draft → Open
+does not require executing code checks.
 
 ## How it works in a project
 

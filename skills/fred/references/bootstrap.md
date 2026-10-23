@@ -6,7 +6,10 @@ Use when the user requests FRED setup or accepts an offer to bootstrap. Inspect
 existing docs, scripts, and CI first. Reuse project knowledge; do not overwrite
 an existing contract or introduce a competing system without a user request.
 Fill template placeholders from this repository, including the real global
-check command and its working directory. Never copy another product's slices.
+check command and its working directory. Keep the entrypoint Git/PR policy as
+Conventional Commits when the user authorizes commits (the template default);
+append project-specific branch/PR rules only when the consuming repo needs
+them. Never copy another product's slices.
 
 | Template | Project destination |
 | --- | --- |

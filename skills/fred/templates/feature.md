@@ -35,12 +35,15 @@ Keep requirements here; shared verification execution steps live in OPERATIONS. 
 ## Implementation acceptance
 
 - [ ] {{OBSERVABLE_SLICE_CRITERION}}
-- [ ] Required behavioral checks pass; UI changes were rendered and inspected.
+- [ ] Required behavioral checks pass; additional QA (including browser/render
+      inspection when called for) matches this FRED's verification criteria.
 - [ ] Project global check passes at its documented scope on the final work.
 
-<!-- Define proportionate checks, including relevant rules, permissions,
-persistence, contracts, and local integration. Existing cheap relevant E2E
-checks still run. Never quietly weaken criteria to fit the implementation. -->
+<!-- Define proportionate checks on this FRED, including relevant rules,
+permissions, persistence, contracts, and local integration. Call for browser
+or render inspection only when UI/browser QA is in scope. Existing cheap
+relevant E2E checks still run. Never quietly weaken criteria to fit the
+implementation. -->
 
 <!-- Changes to acceptance, verification scripts, or CI/global-check coverage
 need a recorded rationale under the project decision process. Review those

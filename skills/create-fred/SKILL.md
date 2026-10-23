@@ -36,8 +36,9 @@ silently migrate an existing project or code the feature during specification.
    contracts, and constraints. Separate implemented facts from proposals.
 3. Identify consequential unknowns: permissions, data/state ownership, external
    behavior, compatibility, error recovery, and deployment/configuration needs.
-   Ask a small focused set of clarifying questions with recommendations and
-   tradeoffs. Progress on independent inspection while answers are pending.
+   For each blocking open decision, give context and suggestions (a
+   recommendation plus tradeoffs), then require explicit user acknowledgment.
+   Progress on independent inspection while answers are pending.
 4. Research genuinely uncertain contracts or integrations using the installed
    versions and relevant official sources. Record source links and assumptions;
    browsing documentation is not proof of a live integration. Avoid research
@@ -48,8 +49,10 @@ silently migrate an existing project or code the feature during specification.
 
 Straightforward requests need no mandatory interview. Use stated assumptions
 for low-impact choices; unresolved decisions that materially change the
-implementation keep the FRED Draft. Do not invent answers or treat silence as
-approval of a required decision.
+implementation keep the FRED Draft with the open questions recorded there.
+Do not invent answers, invent a separate decision lifecycle stage, or treat
+silence as approval. Draft → Open requires explicit user acknowledgment of
+every blocking open decision.
 
 When the runtime can spawn subagents, use multiple in parallel for complex
 specification work: researching distinct contracts, inspecting separate code
@@ -74,11 +77,13 @@ the user invoked the skill.
   Distinguish prerequisites requiring an agreed interface from those requiring
   implemented code. Allowed fakes name assumptions, limitations, and the owner
   of real integration. Check for dependency cycles and shared-surface conflicts.
-- Define proportionate implementation checks. UI slices retain rendering/layout
-  and state inspection; backend slices retain relevant rule, authorization,
-  persistence, and integration checks. Include the project's global lint/format
-  check before implementation review handoff and Implemented/Closed sign-off,
-  including cascading monorepo checks; module checks cannot replace it.
+- Define proportionate implementation checks on the FRED. Include browser or
+  render inspection only when verification criteria call for UI/browser QA;
+  backend slices retain relevant rule, authorization, persistence, and
+  integration checks when those matter. Include the project's global
+  lint/format check (from the entrypoint) before implementation review handoff
+  and Implemented/Closed sign-off, including cascading monorepo checks; module
+  checks cannot replace it.
 - Create applicable OPERATIONS items now for external setup and shared deployed
   journeys. Each has an owner, prerequisites, what it blocks, target, executable
   steps, pass condition, and evidence destination. One flow may cover several
@@ -89,10 +94,12 @@ the user invoked the skill.
 
 Write or update the FRED and synchronize ROADMAP and applicable OPERATIONS
 links. Keep paths stable. Mark Open only when scope/contracts and local
-acceptance are sufficiently defined under project rules; otherwise retain
-Draft with the exact unresolved question and next action. An Open slice may
-still be blocked by an explicit prerequisite. Planning-only Draft → Open does
-not require running code checks or claim implementation/verification success.
+acceptance are sufficiently defined under project rules and every blocking
+open decision has explicit user acknowledgment; otherwise retain Draft with
+the exact unresolved question, suggested options, and next action. An Open
+slice may still be blocked by an explicit prerequisite. Planning-only
+Draft → Open does not require running code checks or claim
+implementation/verification success.
 
 Link existing architecture and guides. Record relevant research where it is
 useful, and label proposed architectural changes; do not describe them as
@@ -102,5 +109,6 @@ without weakening them merely to permit sign-off. Keep secrets out of specs.
 
 Finish with the FRED link, state/track, consequential assumptions or unresolved
 questions, and implementation readiness. When specification stops unfinished,
-leave concise resume notes. Honor existing Git/deploy authorization; allocating
-a slice or creating an operator task does not authorize external actions.
+leave concise resume notes. Honor existing Git/deploy authorization; when
+committing, follow the entrypoint Git/PR policy. Allocating a slice or creating
+an operator task does not authorize external actions.

@@ -60,14 +60,21 @@ stronger model if that is how the user invoked the skill.
   boundaries and coordinate shared interfaces/migrations. Label fakes; they
   cannot establish live compatibility or an integrated outcome promised by scope.
 - Resolve routine implementation choices from the project. Record consequential
-  discoveries and justified specification changes; unresolved product decisions
-  need clarification. Do not expand into adjacent features without user scope.
+  discoveries and justified specification changes. When a product decision
+  blocks only the claimed slice, give context and suggestions (recommendation
+  plus tradeoffs) and require explicit user acknowledgment; record the decision
+  in the FRED. Do not reopen the full create-fred interview or invent a
+  separate decision lifecycle stage. Do not expand into adjacent features
+  without user scope.
 - Update tasks and criteria as work proceeds. Update affected durable architecture
   and reusable procedure guides with changed contracts/boundaries/procedures.
 - Keep necessary behavioral verification with implementation, including relevant
-  rules, permissions, persistence, and local integration. For UI changes, render
-  and inspect the changed surface, layout, responsive behavior, and relevant
-  interaction states. Run relevant existing inexpensive automation too.
+  rules, permissions, persistence, and local integration when the FRED requires
+  them. After the global check, run additional QA (including browser or render
+  inspection when relevant) only if the FRED's verification criteria or QA
+  section calls for it. Prefer available browser tooling for UI/browser-shaped
+  checks; if tooling, auth, or environment is missing, report not-run honestly.
+  Run relevant existing inexpensive automation too.
 - Keep external setup and combined deployed journeys in linked OPERATIONS
   items; refine their steps/owners/pass conditions as needed. Missing required
   slice behavior remains unfinished implementation rather than an operator task.
@@ -79,12 +86,14 @@ and actual tooling. If undocumented, identify and document the supported command
 if absent or unavailable, report the missing gate. Never invent a passing check.
 
 Before handing implementation to review or marking Implemented or Closed,
-**run and require success from the global lint/format check on the current work**.
-It must cascade across applicable modules in a monorepo; module-only checks do
-not replace it. Also require the slice's local behavioral checks. If checks
-modify formatting, inspect the result and establish a pass on the resulting
-tree. Rerun after subsequent changes to check inputs. Record command, directory/
-scope, result, date, and revision or working-tree context in the FRED.
+**run and require success from the entrypoint's global lint/format check on the
+current work**. It must cascade across applicable modules in a monorepo;
+module-only checks do not replace it. Also require the slice's local behavioral
+checks named on the FRED. After that gate, run further QA only when the FRED's
+verification criteria or QA section calls for it. If checks modify formatting,
+inspect the result and establish a pass on the resulting tree. Rerun after
+subsequent changes to check inputs. Record command, directory/scope, result,
+date, and revision or working-tree context in the FRED.
 
 A failed, blocked, or missing check prevents sign-off. Fix causes within scope;
 report unrelated failures with a next action instead of silently broadening
@@ -115,4 +124,5 @@ completed/remaining work, passed/failed/not-run checks, blocker, and next step.
 Update the roadmap claim to reflect whether work is still owned or available.
 Work one selected slice unless the user requested a broader sequence; choose
 another only within that scope. Follow project Git/deploy rules and existing
-conversation authorization. Track scheduling never grants extra external access.
+conversation authorization; when committing, follow the entrypoint Git/PR
+policy. Track scheduling never grants extra external access.

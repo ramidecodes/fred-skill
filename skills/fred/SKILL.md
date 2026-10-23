@@ -78,10 +78,13 @@ blocked, or failing command blocks sign-off: report the cause and next action,
 retain the current state, and do not mark the checks passed. Planning-only
 Draft → Open does not require executing code checks.
 
-UI implementation still requires rendering and inspecting the changed surface,
-layout, responsive behavior, and relevant states. Backend implementation still
-requires proportionate rule, authorization, persistence, and integration checks.
-Defer shared deployed journeys and external setup, not slice correctness.
+After the global check, run additional QA (including browser or render
+inspection when relevant) only when the FRED's verification criteria or QA
+section calls for it. Prefer available browser tooling for UI/browser-shaped
+checks; report not-run honestly when tooling, auth, or environment is missing.
+Backend slices still need proportionate rule, authorization, persistence, and
+integration checks when those criteria apply. Defer shared deployed journeys
+and external setup, not slice correctness the FRED owns.
 
 Deployable features close with preview or production evidence specifying which
 environment passed. Tooling and libraries close with relevant integration
@@ -140,8 +143,10 @@ notes in the FRED: baseline, completed/remaining work, checks, blocker, and next
 action. Refresh the current summary rather than adding a session transcript.
 On resume, compare notes with the actual checkout and relevant environment.
 
-Follow the project's Git/deploy rules and existing conversation authorization.
-If silent, do not commit, push, open PRs, or deploy without a user request.
+Follow the project's Git/deploy rules and existing conversation authorization;
+when committing, follow the entrypoint Git/PR policy (Conventional Commits by
+default). If silent, do not commit, push, open PRs, or deploy without a user
+request.
 Do not claim provider behavior from remembered SDK shapes or documentation
 browsing: check installed versions and relevant official docs, and record
 blocked live probes. Label fixtures. Keep secrets out of specs and evidence.

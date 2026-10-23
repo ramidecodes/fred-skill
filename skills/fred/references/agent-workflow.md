@@ -28,10 +28,13 @@ report the missing gate and resolve it before sign-off.
 
 Stay within scope and project boundaries. Update tasks and criteria as work
 progresses. Use proportionate tests for rules, permissions, persistence, and
-contracts. For UI changes, render and inspect the changed layout and states;
-record inaccessible checks honestly. Execute existing relevant automation.
-Update affected architecture and reusable procedure docs. Create/refine linked
-OPERATIONS items for external setup and combined deployed flows.
+contracts when the FRED requires them. After the global check, run additional
+QA (including browser or render inspection when relevant) only if the FRED's
+verification criteria or QA section calls for it. Prefer available browser
+tooling for UI/browser-shaped checks; record inaccessible or missing-env checks
+honestly as not-run. Execute existing relevant automation. Update affected
+architecture and reusable procedure docs. Create/refine linked OPERATIONS items
+for external setup and combined deployed flows.
 
 Before review handoff or Implemented sign-off:
 
