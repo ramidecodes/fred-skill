@@ -47,6 +47,15 @@ missing contract and offer setup before treating a chat idea as an agreed FRED.
 
 ## Implement the selected scope
 
+When the runtime can spawn subagents, use multiple in parallel for complex
+implementation: exploring separate code areas or tackling independent parts of
+a large slice. Integrate results under the claimed scope. Coordinate shared
+interfaces and migrations sequentially rather than racing conflicting edits.
+When the runtime allows choosing a model for subagents, prefer a
+lighter/faster model for bounded parallel work (research, scoped exploration)
+unless the slice needs stronger reasoning; keep the coordinating session on the
+stronger model if that is how the user invoked the skill.
+
 - Follow contracts, affected surfaces, and non-goals. Use established command
   boundaries and coordinate shared interfaces/migrations. Label fakes; they
   cannot establish live compatibility or an integrated outcome promised by scope.

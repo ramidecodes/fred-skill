@@ -51,6 +51,16 @@ for low-impact choices; unresolved decisions that materially change the
 implementation keep the FRED Draft. Do not invent answers or treat silence as
 approval of a required decision.
 
+When the runtime can spawn subagents, use multiple in parallel for complex
+specification work: researching distinct contracts, inspecting separate code
+areas, or drafting independent FRED sections. Synthesize results in the
+coordinating session. Keep ID allocation, conflicting shared-surface decisions,
+and Draft → Open readiness sequential. When the runtime allows choosing a model
+for subagents, prefer a lighter/faster model for bounded parallel work
+(research, section drafts, scoped exploration) unless the slice needs stronger
+reasoning; keep the coordinating session on the stronger model if that is how
+the user invoked the skill.
+
 ## Specify the slice and its place in the roadmap
 
 - Use the project template; allocate the next unused stable ID from ROADMAP
