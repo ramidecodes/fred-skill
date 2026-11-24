@@ -47,6 +47,8 @@ sibling skill paths surviving installation. If infrastructure is missing, offer
 `/init` via available `fred` (bootstrap) when authorized; otherwise report the
 missing contract and offer setup before treating a chat idea as an agreed FRED.
 For human status / “what’s left” questions, prefer available `fred-status`.
+At review handoff, prefer available `fred-review` when independent inspection
+is useful.
 
 ## Implement the selected scope
 
@@ -107,10 +109,14 @@ Do not weaken verification just to obtain a pass.
 
 Mark Implemented only after scoped behavior, required local checks, the global
 check, and affected documentation are complete in the project's integration
-baseline. Update FRED/ROADMAP together with date, baseline, remaining delivery
-links, next action, and ownership. Required review follows project policy; a
-separate model/session needs applicable authorization. Findings distinguish
-required corrections (reopen), delivery gaps, and optional improvements.
+baseline. Before marking Implemented or Closed, offer or use available
+`fred-review` for consequential handoffs (contract + diff + evidence); not
+routine for every tiny Open FRED, and not a substitute for the global check or
+OPERATIONS delivery. Update FRED/ROADMAP together with date, baseline,
+remaining delivery links, next action, and ownership. Required review follows
+project policy; a separate model/session needs applicable authorization.
+Findings distinguish required corrections (reopen), delivery gaps, and optional
+improvements.
 
 Successful coding normally ends at Implemented. Closed additionally needs
 applicable review/setup/flow evidence in the declared target and a current

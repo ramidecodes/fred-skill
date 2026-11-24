@@ -1,9 +1,9 @@
 # Optional companion and project skills
 
 Read when deciding whether to add skills to this package or a consuming project.
-The package includes `fred`, `create-fred`, `implement-fred`, and `fred-status`.
-Project rules remain in the consuming entrypoint/documents, with further detail
-loaded on demand.
+The package includes `fred`, `create-fred`, `implement-fred`, `fred-status`,
+and `fred-review`. Project rules remain in the consuming entrypoint/documents,
+with further detail loaded on demand.
 
 ## Decide whether a skill adds value
 
@@ -29,27 +29,35 @@ from the core skill. Companions remain optional and preserve lifecycle/check gat
 | `create-fred` | Feature idea or Draft + project context → scoped Draft/Open specification, roadmap and operation links |
 | `implement-fred` | Named FRED or next/trackline request + project contract → implemented slice with evidence, or precise blocker/resume notes |
 | `fred-status` | Status / what’s left / dogfood readiness ask → human posture report (name/state/done/left/unblocks); no lifecycle flips |
+| `fred-review` | FRED + code/diff + contracts/evidence → Required corrections / Delivery gaps / Optional improvements (handoff before Implemented/Closed, or named FRED/diff) |
 
 The task skills are self-contained consumers of project documents, with no
 assumed sibling installation. They do not select different models automatically.
-Their descriptions route ordinary creation and coding away from the core;
-the core still supports those tasks when explicitly invoked or installed alone.
+Their descriptions route ordinary creation, coding, status, and review away
+from the core; the core still supports those tasks when explicitly invoked or
+installed alone.
 
-Further candidates:
+**`fred-review` timing:** primary trigger is end of an implementation round on
+an Open (or Implemented-candidate) FRED — review handoff before Implemented or
+Closed. Coordinators/users may invoke earlier for consequential mid-slice
+checks. Not routine for every tiny Open FRED; not a substitute for the global
+check or OPERATIONS delivery.
+
+Further candidates (project-local; not packaged here):
 
 | Candidate | Inputs → result | Where it fits / when worthwhile |
 | --- | --- | --- |
-| `fred-review` | FRED + code/diff + relevant contracts/evidence → actionable review record | First portable candidate if independent reviews recur; use project review criteria and the existing FRED findings format. |
 | `project-delivery-check` | Named OPERATIONS items + target/access + guides → executed results or precise blockers | Project-local when combined UX checks recur and tooling/access differ by project. |
 | `project-ci-diagnose` | Revision/run or failure + CI guide → diagnosed cause and scoped remedy | Project-local when log analysis and remediation recur; a simple check command alone needs no skill. |
 | `project-data-verify` | Expected behavior + target/tenant + DB guide → relevant data evidence | Project-local when data inspection needs repeatable judgment beyond an existing script. |
 
 The further candidates are illustrative proposals, not packaged skills.
-Bootstrap (`/init`) remains in `fred` — do not add a separate `fred-init`
-skill. Avoid extracting review merely to force expensive models or adding all
-further candidates as a suite.
+Bootstrap (`/init`) remains in `fred` — do not add a separate `fred-init` or
+`fred-close` skill. Do not auto-generate product FREDs from a codebase scan.
+Domain skills stay in consuming repos. Avoid invoking review merely to force
+expensive models or adding all further candidates as a suite.
 
-Invoking a review skill selects instructions; it does not itself select a
+Invoking `fred-review` selects instructions; it does not itself select a
 stronger model or create an independent reviewer context. When independence
 is required, use an authorized separate session/agent with the FRED, code,
 contracts, and evidence, rather than relying on a role change in the same chat.

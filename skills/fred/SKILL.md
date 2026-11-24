@@ -6,7 +6,8 @@ description: >-
   indexes, coordinate parallel tracklines/claim boards, manage delivery gates,
   or review the project workflow. Routine slice specification and coding use
   create-fred and implement-fred when available; human status reports use
-  fred-status when available.
+  fred-status when available; implementation handoff review uses fred-review
+  when available.
 ---
 
 # FRED
@@ -19,12 +20,14 @@ user instructions govern the consuming repository; templates are seeds.
 For routine tasks, use available `create-fred` to gather requirements and write
 or refine a slice, and `implement-fred` to select and execute agreed work.
 Use available `fred-status` for roadmap / “what’s left” / dogfood posture
-reports. Those skills read the consuming project's contract directly. Do not
-assume optional siblings are installed or resolve them through relative source
-paths. When only `fred` is available, its template and references still support
-these tasks. Bootstrap (`/init`) and migration remain here — there is no
-separate `fred-init` skill. No model change or delegation is implied by
-selecting a skill.
+reports. Use available `fred-review` at review handoff before Implemented or
+Closed (or when the user asks to review a named FRED/diff). Those skills read
+the consuming project's contract directly. Do not assume optional siblings are
+installed or resolve them through relative source paths. When only `fred` is
+available, its template and references still support these tasks. Bootstrap
+(`/init`) and migration remain here — there is no separate `fred-init` or
+`fred-close` skill. No model change or delegation is implied by selecting a
+skill.
 
 ## Start and route
 
@@ -125,6 +128,9 @@ an integrated outcome promised by the slice.
 
 Planning and state details: [references/methodology.md](references/methodology.md).
 Implementation, review, and sign-off: [references/agent-workflow.md](references/agent-workflow.md).
+Hosts, subagents, and models: [references/hosts-and-subagents.md](references/hosts-and-subagents.md).
+Optional decision seed: [templates/decision.md](templates/decision.md) (copy to
+`docs/decisions/` when the project wants recorded decisions).
 
 ## Delivery and documentation
 
@@ -140,12 +146,16 @@ detail only when relevant; there is no fixed eleven-section requirement.
 
 ## Review and permissions
 
-Independent review is optional unless the project or user requires it. Consider
-it for consequential changes and cross-track integration. Use an available
-reviewer/model within authorized scope; this skill does not require a provider
-or authorize paid model calls. Record required corrections separately from
-delivery gaps and optional improvements. Document and justify scope changes;
-never quietly weaken acceptance. Review approval does not replace execution.
+Independent review is optional unless the project or user requires it. Prefer
+available `fred-review` after an implementation round — at handoff before
+Implemented or Closed — or when the user asks to review a named FRED/diff.
+Not routine for every tiny Open FRED; not a substitute for the global check or
+OPERATIONS delivery. Consider review for consequential changes and cross-track
+integration. Use an available reviewer/model within authorized scope; this
+skill does not require a provider or authorize paid model calls. Record
+required corrections separately from delivery gaps and optional improvements.
+Document and justify scope changes; never quietly weaken acceptance. Review
+approval does not replace execution.
 
 Changes to acceptance, verification scripts, or CI/global-check scope need a
 recorded rationale under the project's decision process. Do not disable checks
@@ -172,15 +182,16 @@ preserves existing scope, IDs, history, and verification evidence.
 
 ## Optional companion skills
 
-The package includes `create-fred`, `implement-fred`, and `fred-status` for
-specification, coding, and human status reports. Shared project rules live in
-the entrypoint and project documents; companions load the task guidance they
-need.
+The package includes `create-fred`, `implement-fred`, `fred-status`, and
+`fred-review` for specification, coding, human status reports, and
+implementation handoff review. Shared project rules live in the entrypoint and
+project documents; companions load the task guidance they need.
 Consider a separate skill only for a recurring, distinct workflow with clear
 inputs, outputs, and invocation boundaries. Project guides remain authority;
 companions consume them and write results into existing FRED/OPERATIONS files.
 Keep FRED usable without companions, and preserve its global check gate.
-For candidate workflows, packaging versus project-local placement, and manual
-invocation policies, read [references/project-skills.md](references/project-skills.md)
+For packaging versus project-local placement, non-goals, and manual invocation
+policies, read [references/project-skills.md](references/project-skills.md)
 when evaluating or adding further skills. Do not bootstrap a project skill suite
-by default.
+by default; do not add `fred-init` / `fred-close` or auto-generate product
+FREDs from a codebase scan.

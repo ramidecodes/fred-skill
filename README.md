@@ -97,16 +97,19 @@ verification merely to obtain a pass.
 | [create-fred](skills/create-fred/SKILL.md) | Gather requirements, research relevant contracts, ask focused questions, create/refine a slice | Draft/Open FRED, roadmap row, applicable operation items |
 | [implement-fred](skills/implement-fred/SKILL.md) | Implement a named FRED or pick the next ready slice in the requested/active trackline | Implemented slice with check evidence, or explicit blocker/resume notes |
 | [fred-status](skills/fred-status/SKILL.md) | `/status`, what’s left, dogfood readiness, implementation posture | Human-readable posture report (name/state/done/left/unblocks) |
+| [fred-review](skills/fred-review/SKILL.md) | Review handoff before Implemented/Closed, or named FRED/diff review | Required corrections / Delivery gaps / Optional improvements |
 
 For the usual workflow, alternate between `create-fred` and `implement-fred`.
 Creation is conversational but does not require an interview for a clear request.
 Implementation normally completes one agreed slice and ends at Implemented;
-combined deployed flows remain explicit in OPERATIONS. The roadmap can designate
-an active/focus trackline. A blocked selected trackline is reported rather than
-silently replaced. Use `fred-status` (or `/status`) for product-owner status
-reports — never bare ID lists.
+combined deployed flows remain explicit in OPERATIONS. Offer or use
+`fred-review` at consequential handoffs — not for every tiny Open FRED, and
+not instead of the global check or OPERATIONS delivery. The roadmap can
+designate an active/focus trackline. A blocked selected trackline is reported
+rather than silently replaced. Use `fred-status` (or `/status`) for
+product-owner status reports — never bare ID lists.
 
-All four skills read project documents as authority. The task skills do not
+All five skills read project documents as authority. The task skills do not
 depend on sibling files surviving selective installation. `fred` can still
 support ordinary slice work when installed alone or explicitly invoked. Skill
 selection does not automatically change model or launch an independent agent.
@@ -114,18 +117,24 @@ selection does not automatically change model or launch an independent agent.
 Add further companions only when a distinct workflow repeatedly benefits from
 its own invocation and judgment. Guides own project facts/procedures; scripts
 handle repeated mechanics; skills write results into existing documents.
-Independent FRED review is a potential further reusable companion.
 Delivery-flow execution, CI diagnosis, and database evidence collection are
 better project-local candidates when they need environment-specific guidance.
 Those further candidates are proposals, not packaged skills. Do not generate
-a project skill suite or one skill per lifecycle stage by default. There is no
-separate `fred-init` skill — `/init` routes to `fred`.
+a project skill suite or one skill per lifecycle stage by default.
 
 Companions can be manually invoked using the host's supported policy. Keep
 ordinary FRED discovery available, avoid automatic chaining of manual-only
 skills, and preserve the global check requirement. See the
 [companion evaluation](skills/fred/references/project-skills.md) for selection,
-placement, inputs/results, and host-specific invocation settings.
+placement, inputs/results, and host-specific invocation settings. Host and
+subagent/model patterns:
+[hosts-and-subagents](skills/fred/references/hosts-and-subagents.md).
+
+### Explicit non-goals
+
+- Do **not** add `fred-close` or `fred-init` (`/init` routes to `fred`).
+- Do **not** auto-generate product FREDs from a codebase scan.
+- Domain / stack skills stay in consuming repositories, not this package.
 
 ## When to use
 
@@ -153,10 +162,10 @@ Same source, full GitHub URL, skill named `fred` only:
 npx skills add https://github.com/ramidecodes/fred-skill --skill fred
 ```
 
-Select the four packaged skills explicitly:
+Select the packaged skills explicitly:
 
 ```bash
-npx skills add ramidecodes/fred-skill --skill fred --skill create-fred --skill implement-fred --skill fred-status
+npx skills add ramidecodes/fred-skill --skill fred --skill create-fred --skill implement-fred --skill fred-status --skill fred-review
 ```
 
 Global (user-level, all projects):
@@ -171,10 +180,10 @@ From a local clone:
 npx skills add /path/to/fred-skill
 ```
 
-Install/update all four globally from the current checkout:
+Install/update all five globally from the current checkout:
 
 ```bash
-npx skills add . -g --skill fred --skill create-fred --skill implement-fred --skill fred-status
+npx skills add . -g --skill fred --skill create-fred --skill implement-fred --skill fred-status --skill fred-review
 ```
 
 Default installation is project-local; `-g` selects global installation. The
@@ -211,6 +220,8 @@ $implement-fred Implement the next ready FRED in the active trackline.
 
 $fred-status What's left before dogfood feels usable?
 
+$fred-review Review FRED 012 against its contract, diff, and evidence before Implemented.
+
 $create-fred Refine our export-to-CSV Draft. Keep it a slice, not the reporting suite.
 
 $fred Bootstrap FRED docs in this repo from the skill templates.
@@ -222,6 +233,12 @@ Review this Implemented FRED against its code and evidence. Separate required fi
 $fred Migrate our index to tracks and collect pending setup/UX checks in OPERATIONS.
 ```
 
+## Examples
+
+- [examples/](examples/) — product-neutral miniature ROADMAP with parallel
+  tracklines, serialization rules, an active claim board, and a note that a
+  historical inventory board may sit beside it.
+
 ## For humans vs for agents
 
 - **This README** is the idea: why FRED, how implementation and delivery verification fit together, how to install.
@@ -229,8 +246,11 @@ $fred Migrate our index to tracks and collect pending setup/UX checks in OPERATI
 - `skills/create-fred/SKILL.md` guides requirement gathering and specification.
 - `skills/implement-fred/SKILL.md` guides work selection, implementation, and verification.
 - `skills/fred-status/SKILL.md` guides human status / posture reports.
-- `skills/fred/references/` is detail (methodology, workflow, bootstrap) loaded when needed.
-- `skills/fred/templates/` is what gets copied into a consuming repo, then edited there.
+- `skills/fred-review/SKILL.md` guides independent review at handoff / named FRED review.
+- `skills/fred/references/` is detail (methodology, workflow, bootstrap, hosts) loaded when needed.
+- `skills/fred/templates/` is what gets copied into a consuming repo, then edited there
+  (includes optional `decision.md` for `docs/decisions/`).
+- `examples/` shows filled scheduling shape without encoding a real product.
 
 ## License
 

@@ -37,6 +37,8 @@ From the scan, fill template placeholders honestly:
   runtime-truth (Draft/Open ≠ shipped).
 - Optional thin root `AGENTS.md` pointer to the entrypoint (append; do not
   replace existing AGENTS content).
+- Optional `docs/decisions/` using `templates/decision.md` when the project
+  wants recorded decisions — do not invent product decision IDs.
 
 Show the derived plan briefly when useful; then write only what is missing.
 
@@ -48,6 +50,7 @@ Show the derived plan briefly when useful; then write only what is missing.
 | `templates/feature.md` | `docs/features/template.md` |
 | `templates/ROADMAP.md` | `docs/features/ROADMAP.md` |
 | `templates/OPERATIONS.md` | `docs/features/OPERATIONS.md` |
+| `templates/decision.md` (optional) | `docs/decisions/` when the project wants recorded decisions — copy as needed; do not invent product decision IDs |
 
 Optional root AGENTS pointer:
 
@@ -67,9 +70,11 @@ invent an environment launcher or run it during planning-only sessions.
 Do not generate companion skills by default. When the user wants recurring
 procedures packaged as skills, use the optional companion guidance linked from
 SKILL.md, preserving existing guides as authority and host invocation policies.
-If `create-fred`, `implement-fred`, and `fred-status` are available, list their
-roles in the project entrypoint without assuming they are installed. Bootstrap
-does not copy their definitions into the consuming project.
+If `create-fred`, `implement-fred`, `fred-status`, and `fred-review` are
+available, list their roles in the project entrypoint without assuming they
+are installed. Bootstrap does not copy their definitions into the consuming
+project. Do not add `fred-init` / `fred-close` skills or auto-generate product
+FREDs from a codebase scan.
 
 The first requested slice uses the next unused ID (001 in a new project), has
 a ROADMAP row (and claim-board seed when tracklines apply), and stays Draft

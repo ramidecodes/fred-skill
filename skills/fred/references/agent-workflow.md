@@ -19,8 +19,11 @@ For human roadmap / “what’s left” / dogfood questions, prefer available
 When spawning subagents, give **scoped clear tasks** (bounded paths, contracts,
 or FRED sections). Prefer lighter/faster models for bounded parallel work;
 keep the coordinating session on the stronger model when that is how the user
-invoked the work. Claim boards and trackline scheduling do not themselves
-authorize delegation, push, or deployment.
+invoked the work. Integrate results; serialize shared interfaces and
+migrations. Skill selection does not itself change model or authorize paid
+calls. Claim boards and trackline scheduling do not themselves authorize
+delegation, push, or deployment. Host and model patterns:
+[hosts-and-subagents.md](./hosts-and-subagents.md).
 
 Use entrypoint descriptions and section links to find the needed source, then
 read it. On resumed work, inspect the actual checkout and local changes against
@@ -82,9 +85,14 @@ secrets out of notes, and verify their baseline before resuming.
 ## Independent review when applicable
 
 Use project/user review requirements; otherwise select based on consequence
-and uncertainty. A separate reviewer or stronger available model can inspect
-the FRED, actual diff/code, relevant architecture, and local evidence. Do not
-launch delegation or change model/cost settings without applicable authorization.
+and uncertainty. Prefer available `fred-review` at **review handoff** after an
+implementation round on an Open (or Implemented-candidate) FRED — before
+marking Implemented or Closed — or when the user asks to review a named
+FRED/diff. Not routine for every tiny Open FRED; not a substitute for the
+global check or OPERATIONS delivery. A separate reviewer or stronger available
+model can inspect the FRED, actual diff/code, relevant architecture, and local
+evidence. Do not launch delegation or change model/cost settings without
+applicable authorization.
 
 Inspect changes to criteria, test assertions/fixtures, verification scripts,
 and CI/global-check coverage alongside feature code. Require a recorded reason

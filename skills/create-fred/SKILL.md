@@ -28,7 +28,8 @@ If FRED infrastructure is missing, offer `/init` via available `fred`
 continue useful requirement gathering and offer bootstrap before creating a
 competing document structure. Do not silently migrate an existing project or
 code the feature during specification. For human “what’s left” / status
-questions, prefer available `fred-status`.
+questions, prefer available `fred-status`. Implementation handoff review uses
+available `fred-review` (not part of specification).
 
 ## Gather and resolve requirements
 

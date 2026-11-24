@@ -48,8 +48,10 @@ push, or deployment.
 | --- | --- | --- |
 | Choose work, inspect tracks or claims | [ROADMAP](../features/ROADMAP.md) | Scheduling, tracklines, prerequisites, next actions |
 | **Status / “what’s left” for a human** | Prefer `fred-status` when installed; else [Status reports](#status-reports-roadmap--implementation) · [ROADMAP](../features/ROADMAP.md) | Plain-language posture + per-item name/id/state/done/left/unblocks — never bare FRED/OP codes |
+| **Review handoff / named FRED review** | Prefer `fred-review` when installed; else project review policy | Required corrections / Delivery gaps / Optional improvements |
 | Execute setup or shared delivery flows | [OPERATIONS](../features/OPERATIONS.md) | Task steps, pass conditions, results |
 | Specify a slice | [FRED template](../features/template.md) | Slice requirements and evidence shape |
+| Record a product/architecture decision (optional) | {{DECISIONS_DIR_OR_N_A}} — thin template: id, title, status, date, context, decision, consequences, links | Durable decisions when the project maintains them |
 | Understand/change system boundaries | {{ARCHITECTURE_DOC}} | Durable system boundaries and decisions |
 | Change domain data or shared interfaces | {{SCHEMA_OR_CONTRACT_DOC_OR_N_A}} | State ownership and canonical contracts |
 | Implement UI layout and states | {{DESIGN_DOC_OR_N_A}} | Design requirements |
