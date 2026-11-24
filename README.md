@@ -2,7 +2,7 @@
 
 Works with Cursor, Claude Code, and Codex via the [skills CLI](https://github.com/vercel-labs/skills).
 
-You describe what you want in plain language. An agent turns that into a scoped FRED and implements from that file. A roadmap groups implementation into tracks; operations checklists capture setup and shared UX verification. Independent review can use a separate, more capable model when useful. All of it lives in the repo, next to the code.
+You describe what you want in plain language. An agent turns that into a scoped FRED and implements from that file. A roadmap groups implementation into tracks and optional **tracklines** (parallel claim boards); operations checklists capture setup and shared UX verification. Independent review can use a separate, more capable model when useful. All of it lives in the repo, next to the code.
 
 Linear, Notion, and Jira can still exist. For this slice of planning they are optional sources you cite as “derived from.” The documents the agent maintains and implements from are in git.
 
@@ -11,9 +11,13 @@ This package is methodology plus generators. It does not encode a product, cloud
 ## At a glance
 
 FRED is a repo-native workflow: one implementation slice per file, stable IDs
-and paths, parallel tracks, and explicit verification evidence. Its lifecycle is
-Draft → Open → Implemented → Closed. Implementation can finish while external
-setup or a combined deployed journey remains pending.
+and paths, parallel tracks/tracklines, and explicit verification evidence. Its
+lifecycle is Draft → Open → Implemented → Closed. Implementation can finish
+while external setup or a combined deployed journey remains pending.
+
+**Git default:** agents may **commit** their own changes when authorized;
+**push / provision / deploy** need user authorization. Conventional Commits put
+the FRED id in the commit **body** (`Refs: NNN`), not in the scope.
 
 ## The workflow
 
@@ -50,7 +54,7 @@ does not require executing code checks.
 docs/
 ├── agent-guides/00-AGENT-ENTRYPOINT.md   # workflow, commands, guide pointers
 └── features/
-    ├── ROADMAP.md                        # IDs, ordered tracks, claims, next actions
+    ├── ROADMAP.md                        # IDs, tracks/tracklines, claims, next actions
     ├── OPERATIONS.md                     # setup and shared delivery-flow evidence
     ├── template.md                       # lean slice skeleton
     └── NNN-kebab-slug.md                 # stable path in every lifecycle state
@@ -65,11 +69,11 @@ docs/
 - **OPERATIONS** owns outstanding setup and combined UX verification. One flow
   may cover several FREDs; keep secrets out of documentation and evidence.
 - **Code** establishes runtime facts. Resolve discrepancies with requirements
-  and architecture explicitly.
+  and architecture explicitly. Draft/Open ≠ shipped.
 
 Readiness and blockers are roadmap fields, not extra lifecycle states. Each
-Implemented slice has a date and a next action or pending gate. Tracks do not
-authorize delegation, Git actions, or deployments.
+Implemented slice has a date and a next action or pending gate. Tracklines do
+not authorize delegation, push, or deployments.
 
 This skill's templates are seeds. Existing project documents govern the repo.
 Architecture and CI/database/preview guides are added only when useful; link
@@ -89,18 +93,20 @@ verification merely to obtain a pass.
 
 | Skill | Use it for | Output |
 | --- | --- | --- |
+| [fred](skills/fred/SKILL.md) | `/init` bootstrap, migration, trackline coordination, methodology/workflow review | Project contract and maintained framework documents |
 | [create-fred](skills/create-fred/SKILL.md) | Gather requirements, research relevant contracts, ask focused questions, create/refine a slice | Draft/Open FRED, roadmap row, applicable operation items |
-| [implement-fred](skills/implement-fred/SKILL.md) | Implement a named FRED or pick the next ready slice in the requested/active track | Implemented slice with check evidence, or explicit blocker/resume notes |
-| [fred](skills/fred/SKILL.md) | Bootstrap, migration, track coordination, and methodology/workflow review | Project contract and maintained framework documents |
+| [implement-fred](skills/implement-fred/SKILL.md) | Implement a named FRED or pick the next ready slice in the requested/active trackline | Implemented slice with check evidence, or explicit blocker/resume notes |
+| [fred-status](skills/fred-status/SKILL.md) | `/status`, what’s left, dogfood readiness, implementation posture | Human-readable posture report (name/state/done/left/unblocks) |
 
 For the usual workflow, alternate between `create-fred` and `implement-fred`.
 Creation is conversational but does not require an interview for a clear request.
 Implementation normally completes one agreed slice and ends at Implemented;
 combined deployed flows remain explicit in OPERATIONS. The roadmap can designate
-an active/focus track. A blocked selected track is reported rather than silently
-replaced by another track.
+an active/focus trackline. A blocked selected trackline is reported rather than
+silently replaced. Use `fred-status` (or `/status`) for product-owner status
+reports — never bare ID lists.
 
-All three skills read project documents as authority. The task skills do not
+All four skills read project documents as authority. The task skills do not
 depend on sibling files surviving selective installation. `fred` can still
 support ordinary slice work when installed alone or explicitly invoked. Skill
 selection does not automatically change model or launch an independent agent.
@@ -112,7 +118,8 @@ Independent FRED review is a potential further reusable companion.
 Delivery-flow execution, CI diagnosis, and database evidence collection are
 better project-local candidates when they need environment-specific guidance.
 Those further candidates are proposals, not packaged skills. Do not generate
-a project skill suite or one skill per lifecycle stage by default.
+a project skill suite or one skill per lifecycle stage by default. There is no
+separate `fred-init` skill — `/init` routes to `fred`.
 
 Companions can be manually invoked using the host's supported policy. Keep
 ordinary FRED discovery available, avoid automatic chaining of manual-only
@@ -146,10 +153,10 @@ Same source, full GitHub URL, skill named `fred` only:
 npx skills add https://github.com/ramidecodes/fred-skill --skill fred
 ```
 
-Select the three packaged skills explicitly:
+Select the four packaged skills explicitly:
 
 ```bash
-npx skills add ramidecodes/fred-skill --skill fred --skill create-fred --skill implement-fred
+npx skills add ramidecodes/fred-skill --skill fred --skill create-fred --skill implement-fred --skill fred-status
 ```
 
 Global (user-level, all projects):
@@ -164,10 +171,10 @@ From a local clone:
 npx skills add /path/to/fred-skill
 ```
 
-Install/update all three globally from the current checkout:
+Install/update all four globally from the current checkout:
 
 ```bash
-npx skills add . -g --skill fred --skill create-fred --skill implement-fred
+npx skills add . -g --skill fred --skill create-fred --skill implement-fred --skill fred-status
 ```
 
 Default installation is project-local; `-g` selects global installation. The
@@ -185,16 +192,24 @@ Agent contract: read docs/agent-guides/00-AGENT-ENTRYPOINT.md at session start.
 
 ## Bootstrap vs existing docs
 
-When FRED documentation is absent, bootstrap creates the entrypoint, FRED template, ROADMAP, and OPERATIONS, filling placeholders from this repository. The entrypoint records the actual global check command and working directory. Request bootstrap explicitly, or accept the agent's offer.
+When FRED documentation is absent, **`/init`** (via `fred`) creates the
+entrypoint, FRED template, ROADMAP (with trackline seed), and OPERATIONS,
+filling placeholders from a real repo scan. The entrypoint records the actual
+global check command and working directory, commit≠push defaults, and status
+reporting. Request `/init` / bootstrap explicitly, or accept the agent's offer.
 
 Existing project contracts remain authoritative. Legacy open indexes and state folders are migrated only when requested, preserving IDs, scope, history, and actual verification evidence. An old Implemented label alone does not prove deployed closure.
 
 ## Typical prompts
 
 ```text
+$fred /init — Bootstrap FRED docs in this repo from the skill templates.
+
 $create-fred Users can invite people by email. Help define a slice and its checks.
 
-$implement-fred Implement the next ready FRED in the active track.
+$implement-fred Implement the next ready FRED in the active trackline.
+
+$fred-status What's left before dogfood feels usable?
 
 $create-fred Refine our export-to-CSV Draft. Keep it a slice, not the reporting suite.
 
@@ -210,9 +225,10 @@ $fred Migrate our index to tracks and collect pending setup/UX checks in OPERATI
 ## For humans vs for agents
 
 - **This README** is the idea: why FRED, how implementation and delivery verification fit together, how to install.
-- `skills/fred/SKILL.md` owns methodology, bootstrap, migration, and coordination.
+- `skills/fred/SKILL.md` owns methodology, `/init` bootstrap, migration, and coordination.
 - `skills/create-fred/SKILL.md` guides requirement gathering and specification.
 - `skills/implement-fred/SKILL.md` guides work selection, implementation, and verification.
+- `skills/fred-status/SKILL.md` guides human status / posture reports.
 - `skills/fred/references/` is detail (methodology, workflow, bootstrap) loaded when needed.
 - `skills/fred/templates/` is what gets copied into a consuming repo, then edited there.
 

@@ -20,16 +20,18 @@ normally `docs/agent-guides/00-AGENT-ENTRYPOINT.md`. Read ROADMAP (or the
 project's legacy index), then select:
 
 1. A user-named FRED, respecting prerequisites and existing ownership.
-2. Otherwise, the requested track, or the roadmap-designated active/focus track.
-3. Its highest-priority ready, unclaimed Open FRED in track execution order.
-   If no track is designated, use roadmap priority across tracks.
+2. Otherwise, the requested trackline, or the roadmap-designated active/focus
+   trackline.
+3. Its highest-priority ready, unclaimed Open FRED in trackline execution order.
+   If no trackline is designated, use roadmap priority across tracklines.
 
 IDs are identities, not execution order. Check readiness against actual code
 or explicitly agreed contracts/allowed fakes; prerequisites need not be Closed.
-If a requested/designated track has no eligible work, report its precise
-blocker or completed state instead of silently switching tracks. Do not take
-another agent's claim without resolving ownership. Claim selected work and
-record the next action when the project coordinates concurrent execution.
+If a requested/designated trackline has no eligible work, report its precise
+blocker or completed state instead of silently switching tracklines. Do not take
+another agent's claim without resolving ownership. Claim selected work on the
+active claim board and record the next action when the project coordinates
+concurrent execution.
 
 Read the selected FRED, source contracts, linked relevant architecture, and
 necessary guides. Compare resume notes with the actual checkout/local changes
@@ -41,20 +43,22 @@ Implemented/Closed slice needs an explicit corrective task or remaining gate,
 not automatic reimplementation.
 
 Use existing project layout/rules without automatic migration. Do not rely on
-sibling skill paths surviving installation. If infrastructure is missing, use
-an available `fred` bootstrap workflow when authorized; otherwise report the
+sibling skill paths surviving installation. If infrastructure is missing, offer
+`/init` via available `fred` (bootstrap) when authorized; otherwise report the
 missing contract and offer setup before treating a chat idea as an agreed FRED.
+For human status / “what’s left” questions, prefer available `fred-status`.
 
 ## Implement the selected scope
 
 When the runtime can spawn subagents, use multiple in parallel for complex
 implementation: exploring separate code areas or tackling independent parts of
-a large slice. Integrate results under the claimed scope. Coordinate shared
-interfaces and migrations sequentially rather than racing conflicting edits.
-When the runtime allows choosing a model for subagents, prefer a
-lighter/faster model for bounded parallel work (research, scoped exploration)
-unless the slice needs stronger reasoning; keep the coordinating session on the
-stronger model if that is how the user invoked the skill.
+a large slice. Give each subagent a **scoped clear task**. Integrate results
+under the claimed scope. Coordinate shared interfaces and migrations
+sequentially rather than racing conflicting edits. When the runtime allows
+choosing a model for subagents, prefer a lighter/faster model for bounded
+parallel work (research, scoped exploration) unless the slice needs stronger
+reasoning; keep the coordinating session on the stronger model if that is how
+the user invoked the skill.
 
 - Follow contracts, affected surfaces, and non-goals. Use established command
   boundaries and coordinate shared interfaces/migrations. Label fakes; they
@@ -118,11 +122,14 @@ correct code Implemented; code defects reopen their owning slice.
 
 ## Finish or pause
 
-Report selected FRED/track, implemented behavior, check results, state, and next
-action. If unfinished, retain Open and refresh concise resume notes with baseline,
-completed/remaining work, passed/failed/not-run checks, blocker, and next step.
-Update the roadmap claim to reflect whether work is still owned or available.
-Work one selected slice unless the user requested a broader sequence; choose
-another only within that scope. Follow project Git/deploy rules and existing
-conversation authorization; when committing, follow the entrypoint Git/PR
-policy. Track scheduling never grants extra external access.
+Report selected FRED/trackline, implemented behavior, check results, state, and
+next action. Prefer the `fred-status` report shape (name/state/done/left/
+unblocks) when summarizing posture for a human. If unfinished, retain Open and
+refresh concise resume notes with baseline, completed/remaining work,
+passed/failed/not-run checks, blocker, and next step. Update the active claim
+board to reflect whether work is still owned or available. Work one selected
+slice unless the user requested a broader sequence; choose another only within
+that scope. Follow project Git/deploy rules: agents may commit when authorized
+(Conventional Commits; FRED id in the **body**, not scope); **do not push**,
+provision, or deploy without user authorization. Trackline scheduling never
+grants extra external access.

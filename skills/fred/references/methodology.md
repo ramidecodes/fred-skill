@@ -26,6 +26,19 @@ Prefer capability tracks over a default frontend/backend split. A track is a
 schedule, not a long-lived branch or automatic multi-agent runtime. Coordinate
 shared-file edits and claims through ROADMAP when work is concurrent.
 
+### Parallel tracklines
+
+A **trackline** is a named parallel claim board: ordered FRED rows, claim/owner,
+exclusive write ownership (paths or “single claim”), and serialization rules for
+shared surfaces (contracts, migrations, shell/chrome, roadmap single-writer).
+ROADMAP may keep historical inventory boards beside an **active** claim board;
+only the active board schedules new claims unless a row is explicitly re-claimed.
+
+Parallelism rules: one claim per FRED (or an explicit FE/BE split noted on the
+FRED); no silent trackline switch; do not weaken acceptance to unlock
+parallelism; name the real integration owner when using fakes. Trackline
+scheduling does not authorize delegation, push, or deployment.
+
 Prerequisites distinguish an agreed interface from an available implementation.
 For work against a fake, specify the agreed contract, its owner, the fake's
 limitations, and the real integration responsibility. Check cycles: mutually
@@ -45,10 +58,10 @@ branch work remains Open. Do not infer permission to merge or deploy.
 
 Readiness is ready / claimed / blocked in ROADMAP, with owner and specific next
 action. Keep a blocked approved slice Open rather than moving it to Draft.
-ROADMAP may designate an active/focus track. Selection honors the user-named
-FRED or requested track first, then that designation; absent either, use
-cross-track priority. A selected track with no eligible work gets a precise
-blocker/completion report rather than an unannounced switch.
+ROADMAP may designate an active/focus trackline. Selection honors the
+user-named FRED or requested trackline first, then that designation; absent
+either, use cross-trackline priority. A selected trackline with no eligible
+work gets a precise blocker/completion report rather than an unannounced switch.
 Each Implemented FRED records its implementation date and pending next action.
 Periodically inspect aging gates, at a cadence appropriate to the project;
 prefer clearing them before starting more work when verification capacity is full.

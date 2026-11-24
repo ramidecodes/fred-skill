@@ -23,10 +23,12 @@ paths, lifecycle, commands, and permissions; this skill adds a creation workflow
 
 Use the project's legacy index/layout if it has not migrated. Do not load a
 sibling skill by relative filesystem path: this skill can be installed alone.
-If FRED infrastructure is missing, use the available `fred` bootstrap workflow
-when requested or accepted. Otherwise continue useful requirement gathering
-and offer bootstrap before creating a competing document structure. Do not
-silently migrate an existing project or code the feature during specification.
+If FRED infrastructure is missing, offer `/init` via available `fred`
+(bootstrap: scan → propose → write) when requested or accepted. Otherwise
+continue useful requirement gathering and offer bootstrap before creating a
+competing document structure. Do not silently migrate an existing project or
+code the feature during specification. For human “what’s left” / status
+questions, prefer available `fred-status`.
 
 ## Gather and resolve requirements
 
@@ -56,13 +58,14 @@ every blocking open decision.
 
 When the runtime can spawn subagents, use multiple in parallel for complex
 specification work: researching distinct contracts, inspecting separate code
-areas, or drafting independent FRED sections. Synthesize results in the
-coordinating session. Keep ID allocation, conflicting shared-surface decisions,
-and Draft → Open readiness sequential. When the runtime allows choosing a model
-for subagents, prefer a lighter/faster model for bounded parallel work
-(research, section drafts, scoped exploration) unless the slice needs stronger
-reasoning; keep the coordinating session on the stronger model if that is how
-the user invoked the skill.
+areas, or drafting independent FRED sections. Give each subagent a **scoped
+clear task**. Synthesize results in the coordinating session. Keep ID
+allocation, conflicting shared-surface decisions, and Draft → Open readiness
+sequential. When the runtime allows choosing a model for subagents, prefer a
+lighter/faster model for bounded parallel work (research, section drafts,
+scoped exploration) unless the slice needs stronger reasoning; keep the
+coordinating session on the stronger model if that is how the user invoked the
+skill.
 
 ## Specify the slice and its place in the roadmap
 
@@ -73,10 +76,12 @@ the user invoked the skill.
   tasks, implementation acceptance, evidence expectations, and delivery links.
   Add schema/API/event, UI, migration, timeout/recovery, or policy detail only
   where it changes implementation decisions.
-- Assign a bounded-outcome track and identify shared contract/migration owners.
-  Distinguish prerequisites requiring an agreed interface from those requiring
-  implemented code. Allowed fakes name assumptions, limitations, and the owner
-  of real integration. Check for dependency cycles and shared-surface conflicts.
+- Assign a bounded-outcome track/trackline and identify shared
+  contract/migration owners. Distinguish prerequisites requiring an agreed
+  interface from those requiring implemented code. Allowed fakes name
+  assumptions, limitations, and the owner of real integration. Check for
+  dependency cycles and shared-surface conflicts; update the active claim board
+  when the project uses tracklines.
 - Define proportionate implementation checks on the FRED. Include browser or
   render inspection only when verification criteria call for UI/browser QA;
   backend slices retain relevant rule, authorization, persistence, and
@@ -107,8 +112,10 @@ implemented. Add a new document only for knowledge that merits maintenance.
 Record justified changes to existing acceptance or verification expectations,
 without weakening them merely to permit sign-off. Keep secrets out of specs.
 
-Finish with the FRED link, state/track, consequential assumptions or unresolved
-questions, and implementation readiness. When specification stops unfinished,
-leave concise resume notes. Honor existing Git/deploy authorization; when
-committing, follow the entrypoint Git/PR policy. Allocating a slice or creating
+Finish with the FRED link, state/trackline, consequential assumptions or
+unresolved questions, and implementation readiness. When specification stops
+unfinished, leave concise resume notes and refresh ROADMAP claim/next action.
+Honor existing Git/deploy authorization: agents may commit when authorized
+(Conventional Commits; FRED id in the **body**, not scope); **do not push**,
+provision, or deploy without user authorization. Allocating a slice or creating
 an operator task does not authorize external actions.

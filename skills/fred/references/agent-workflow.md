@@ -3,12 +3,24 @@
 ## Choose and prepare
 
 Read the project contract, ROADMAP, and the named or highest-priority ready,
-unclaimed Open FRED in the requested or roadmap-designated active track. Use
-cross-track priority only when neither is designated. If that track has no
-eligible work, report its blocker rather than silently switching. Check implementation prerequisites,
-including explicitly agreed interfaces/fakes. Deepen Draft scope before coding.
-Claim work and record next action when coordinating concurrent implementation.
+unclaimed Open FRED in the requested or roadmap-designated active trackline.
+Use cross-trackline priority only when neither is designated. If that
+trackline has no eligible work, report its blocker rather than silently
+switching. Check implementation prerequisites, including explicitly agreed
+interfaces/fakes. Deepen Draft scope before coding. Claim work and record next
+action on the active claim board when coordinating concurrent implementation.
 Read only relevant architecture and procedure guides; discover missing pointers.
+
+For human roadmap / “what’s left” / dogfood questions, prefer available
+`fred-status` (or the entrypoint status contract) rather than dumping bare IDs.
+
+### Coordinator subagents
+
+When spawning subagents, give **scoped clear tasks** (bounded paths, contracts,
+or FRED sections). Prefer lighter/faster models for bounded parallel work;
+keep the coordinating session on the stronger model when that is how the user
+invoked the work. Claim boards and trackline scheduling do not themselves
+authorize delegation, push, or deployment.
 
 Use entrypoint descriptions and section links to find the needed source, then
 read it. On resumed work, inspect the actual checkout and local changes against
@@ -59,8 +71,9 @@ section in its FRED: date and baseline, completed and remaining work, check
 results including not-run checks, blocker, and the next concrete action. Point
 to existing evidence rather than duplicating logs. Keep the lifecycle state
 honest; pausing does not earn Implemented. Update ROADMAP's next action and
-claim/owner to show whether work remains claimed or is available for pickup.
-Resolve an ambiguous existing claim before taking concurrent ownership.
+claim/owner (active claim board) to show whether work remains claimed or is
+available for pickup. Resolve an ambiguous existing claim before taking
+concurrent ownership.
 
 Omit resume notes for a short slice finished in one session. Remove resolved
 temporary notes or fold durable facts into the appropriate sections. Keep

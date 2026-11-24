@@ -1,8 +1,9 @@
 # Optional companion and project skills
 
 Read when deciding whether to add skills to this package or a consuming project.
-The package includes `fred`, `create-fred`, and `implement-fred`. Project rules
-remain in the consuming entrypoint/documents, with further detail loaded on demand.
+The package includes `fred`, `create-fred`, `implement-fred`, and `fred-status`.
+Project rules remain in the consuming entrypoint/documents, with further detail
+loaded on demand.
 
 ## Decide whether a skill adds value
 
@@ -24,9 +25,10 @@ from the core skill. Companions remain optional and preserve lifecycle/check gat
 
 | Packaged skill | Inputs → result |
 | --- | --- |
-| `fred` | Project/workflow request → bootstrap, migration, track/gate coordination |
+| `fred` | `/init`, bootstrap, or migration request → scan→propose→write FRED skeleton, or migrate legacy indexes; trackline/gate coordination |
 | `create-fred` | Feature idea or Draft + project context → scoped Draft/Open specification, roadmap and operation links |
-| `implement-fred` | Named FRED or next/track request + project contract → implemented slice with evidence, or precise blocker/resume notes |
+| `implement-fred` | Named FRED or next/trackline request + project contract → implemented slice with evidence, or precise blocker/resume notes |
+| `fred-status` | Status / what’s left / dogfood readiness ask → human posture report (name/state/done/left/unblocks); no lifecycle flips |
 
 The task skills are self-contained consumers of project documents, with no
 assumed sibling installation. They do not select different models automatically.
@@ -43,8 +45,9 @@ Further candidates:
 | `project-data-verify` | Expected behavior + target/tenant + DB guide → relevant data evidence | Project-local when data inspection needs repeatable judgment beyond an existing script. |
 
 The further candidates are illustrative proposals, not packaged skills.
-Bootstrap remains in `fred`. Avoid extracting review merely to force expensive
-models or adding all further candidates as a suite.
+Bootstrap (`/init`) remains in `fred` — do not add a separate `fred-init`
+skill. Avoid extracting review merely to force expensive models or adding all
+further candidates as a suite.
 
 Invoking a review skill selects instructions; it does not itself select a
 stronger model or create an independent reviewer context. When independence

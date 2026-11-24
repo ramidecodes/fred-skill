@@ -1,10 +1,12 @@
 ---
 name: fred
 description: >-
-  Bootstrap, migrate, and maintain the FRED methodology in a software
-  repository. Use to set up FRED documents, coordinate parallel tracks, manage
-  delivery gates, or review the project workflow. Routine slice specification
-  and coding use create-fred and implement-fred when available.
+  Bootstrap (/init), migrate, and maintain the FRED methodology in a software
+  repository. Use for /init, bootstrap FRED, set up FRED docs, migrate legacy
+  indexes, coordinate parallel tracklines/claim boards, manage delivery gates,
+  or review the project workflow. Routine slice specification and coding use
+  create-fred and implement-fred when available; human status reports use
+  fred-status when available.
 ---
 
 # FRED
@@ -16,11 +18,13 @@ user instructions govern the consuming repository; templates are seeds.
 
 For routine tasks, use available `create-fred` to gather requirements and write
 or refine a slice, and `implement-fred` to select and execute agreed work.
-Those skills read the consuming project's contract directly. Do not assume
-optional siblings are installed or resolve them through relative source paths.
-When only `fred` is available, its template and references still support these
-tasks. Bootstrap and migration remain here; no model change or delegation is
-implied by selecting a skill.
+Use available `fred-status` for roadmap / “what’s left” / dogfood posture
+reports. Those skills read the consuming project's contract directly. Do not
+assume optional siblings are installed or resolve them through relative source
+paths. When only `fred` is available, its template and references still support
+these tasks. Bootstrap (`/init`) and migration remain here — there is no
+separate `fred-init` skill. No model change or delegation is implied by
+selecting a skill.
 
 ## Start and route
 
@@ -34,9 +38,11 @@ implied by selecting a skill.
    pointers. Route by task, document responsibility, and section; read the
    source before relying on its contracts. Summaries aid discovery, not authority.
    Discover missing relevant documentation when necessary.
-4. If FRED docs are absent and the user wants this methodology, use
-   [references/bootstrap.md](references/bootstrap.md). Offer bootstrap when it
-   has not been requested. Do not impose a competing spec system.
+4. If FRED docs are absent and the user wants this methodology — including
+   `/init`, “bootstrap FRED”, or “set up FRED docs” — use
+   [references/bootstrap.md](references/bootstrap.md) (**scan → propose →
+   write**). Offer bootstrap when it has not been requested. Do not impose a
+   competing spec system.
 
 Existing projects may still use `OPEN-FRED-INDEX.md` and state folders. Follow
 their contract until migration is requested; do not silently reorganize them.
@@ -48,7 +54,7 @@ their contract until migration is requested; do not silently reorganize them.
 | Product / architecture | Intent, durable boundaries, contracts, decisions |
 | Agent entrypoint / guides | Project workflow, commands, environment procedures |
 | FRED | Slice scope, criteria, authoritative lifecycle state, evidence |
-| ROADMAP | Stable IDs, tracks, priority, dependency and state summaries, claims, next actions |
+| ROADMAP | Stable IDs, tracks/tracklines, priority, dependency and state summaries, claim boards, next actions |
 | OPERATIONS | Setup tasks and shared delivery flows, their status and evidence |
 
 Code establishes runtime facts. Resolve discrepancies with intended contracts;
@@ -91,24 +97,31 @@ environment passed. Tooling and libraries close with relevant integration
 evidence. Implemented does not mean “most code exists”; mocks cannot establish
 an integrated outcome promised by the slice.
 
-## Tracks and dependencies
+## Tracks, tracklines, and dependencies
 
 - Allocate the next unused ID from ROADMAP; never reuse an ID. Specify or deepen
   the slice before coding. Use [templates/feature.md](templates/feature.md).
 - Group ordered slices by bounded outcome and ownership. Identify shared
   prerequisites and contracts before opening independent tracks.
+- **Tracklines** are parallel claim boards with exclusive write ownership and
+  serialization rules; see ROADMAP template and methodology. Historical
+  inventory boards may exist beside an active claim board without duplicating
+  authority.
 - Implementation prerequisites block coding or integration. An agreed contract
   and explicitly allowed fake may enable parallel work before the provider is
-  implemented; record assumptions and the owner of real integration.
+  implemented; record assumptions and the owner of real integration. Do not
+  weaken acceptance to unlock parallelism.
 - Delivery gates block closure. Setup actually necessary to discover a contract
   or implement behavior must also be named as an implementation prerequisite.
   Downstream work need not wait for prerequisites to be Closed.
 - For “next,” choose the highest-priority ready, unclaimed Open slice in the
-  requested or roadmap-designated active track, or across tracks if neither is
-  named. If that track has no eligible work, report its blocker rather than
-  silently switching. Respect a named FRED's
-  prerequisites. Readiness, claims, and blockers are roadmap fields, not states.
-- Track scheduling does not authorize delegation, Git actions, or deployment.
+  requested or roadmap-designated active trackline, or across tracklines if
+  neither is named. If that trackline has no eligible work, report its blocker
+  rather than silently switching. Respect a named FRED's prerequisites.
+  Readiness, claims, and blockers are roadmap fields, not states.
+- Trackline scheduling does not authorize delegation, push, or deployment.
+  Default Git policy: agents may commit when authorized; do not push without
+  user authorization.
 
 Planning and state details: [references/methodology.md](references/methodology.md).
 Implementation, review, and sign-off: [references/agent-workflow.md](references/agent-workflow.md).
@@ -145,21 +158,24 @@ On resume, compare notes with the actual checkout and relevant environment.
 
 Follow the project's Git/deploy rules and existing conversation authorization;
 when committing, follow the entrypoint Git/PR policy (Conventional Commits by
-default). If silent, do not commit, push, open PRs, or deploy without a user
-request.
+default; FRED id in the commit **body**, not the scope). Agents may commit
+their own changes when authorized; **do not push**, open PRs, provision, or
+deploy without a user request. If silent on commits, do not commit either.
 Do not claim provider behavior from remembered SDK shapes or documentation
 browsing: check installed versions and relevant official docs, and record
 blocked live probes. Label fixtures. Keep secrets out of specs and evidence.
 
-Bootstrap creates an entrypoint, FRED template, ROADMAP, and OPERATIONS, plus an
-optional root AGENTS pointer. Migration is explicit and preserves existing
-scope, IDs, history, and verification evidence; see bootstrap guidance.
+Bootstrap (`/init`) creates an entrypoint, FRED template, ROADMAP (with
+trackline seed), and OPERATIONS, plus an optional root AGENTS pointer —
+scan → propose → write; see bootstrap guidance. Migration is explicit and
+preserves existing scope, IDs, history, and verification evidence.
 
 ## Optional companion skills
 
-The package includes `create-fred` and `implement-fred` for the recurring
-specification and coding workflows. Shared project rules live in the entrypoint
-and project documents; companions load the task guidance they need.
+The package includes `create-fred`, `implement-fred`, and `fred-status` for
+specification, coding, and human status reports. Shared project rules live in
+the entrypoint and project documents; companions load the task guidance they
+need.
 Consider a separate skill only for a recurring, distinct workflow with clear
 inputs, outputs, and invocation boundaries. Project guides remain authority;
 companions consume them and write results into existing FRED/OPERATIONS files.
